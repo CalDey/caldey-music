@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card-radius {
+    @apply rounded-md
+}
+
+.safe-container {
+    @apply mx-8 my-4
+}

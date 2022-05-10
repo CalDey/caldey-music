@@ -1,0 +1,17 @@
+<template>
+    <div class="h-full overflow-hidden">
+        <Header />
+        <RouterView />
+        <Footer />
+    </div>
+</template>
+
+<script setup lang="ts">
+// 禁止全局横轴滚动条
+document.body.style.overflowX = "hidden";
+import Header from "@/components/layout/header/Header.vue";
+import Footer from "@/components/layout/footer/Footer.vue";
+</script>
+
+<style scoped>
+</style>
