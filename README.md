@@ -1,11 +1,15 @@
 # caldey-music
-使用Vue3+TS+Pinia+TailWindCSS开发一个简约风格的响应式音乐播放网站，通过TailwindCSS实现了PC端/移动端响应式布局，全局适配骨架屏
+使用Vue3+TS+Pinia+TailWindCSS+Element Plus开发一个简约风格的响应式音乐播放网站，通过TailwindCSS实现了PC端/移动端响应式布局，全局适配骨架屏
 已完成50%功能，登录功能，歌曲搜索，歌词，MV等功能暂未开放
+
+# 接口文档
+该项目使用[网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/)，可参考文档部署接口，推荐使用`Vercel`进行部署
 
 # 在线预览Demo
 http://182.92.202.161:3003/#/
 
 # 项目预览
+(目前所有页面全部适配骨架屏，具体效果可以参考在线Demo)
 <div>
   <img width="1362" alt="截屏2022-05-10 下午4 50 00" src="https://user-images.githubusercontent.com/56568751/167588953-99ba3b5a-c95b-4813-9f59-97095ccae7a0.png">
   <span>首页</span>
@@ -32,4 +36,10 @@ http://182.92.202.161:3003/#/
 </div>
 
 # 说明
-该项目还处于开发阶段，demo可能存在部分bug，后期会统一修复已知bug
+该项目还处于开发阶段，demo可能存在部分bug，全部功能开发完毕后会进行统一修复
+
+# 项目运行
+```
+yarn install
+yarn run dev
+```
