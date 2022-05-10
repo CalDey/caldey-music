@@ -152,7 +152,7 @@ export const usePlayerStore = defineStore({
         },
         // 随机播放
         randomPlay() {
-            this.play(this.playList.sample().id)
+            this.play(this.playList[Math.ceil(Math.random() * this.playList.length -1)].id)
         },
         //播放、暂停
         togglePlay() {
