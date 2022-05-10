@@ -24,10 +24,10 @@
 import { onMounted, toRefs, ref } from "vue";
 import type { Banner } from "@/models/banner";
 import { useCommonStore } from "@/store/common";
+import { useIsMobileStore } from "@/store/m_check";
 const { banners } = toRefs(useCommonStore())
 const { getBanners } = useCommonStore()
 
-import { useIsMobileStore } from "@/store/m_check";
 const { isMobile, carouselHeight } = toRefs(useIsMobileStore())
 
 const loading = ref<boolean>(true)

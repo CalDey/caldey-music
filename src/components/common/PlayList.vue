@@ -23,6 +23,7 @@ import {storeToRefs} from "pinia";
 import {usePlayerStore} from "@/store/player";
 
 const {showPlayList, playListCount, playList, id} = storeToRefs(usePlayerStore())
+const {play} = usePlayerStore()
 </script>
 
 <style lang="scss" scoped>

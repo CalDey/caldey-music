@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
   import { userCheckMobile } from '@/store/m_check'
-  userCheckMobile()
   import {userPlayerInit} from "@/store/player"
+  userCheckMobile()
   userPlayerInit()
 </script>
 

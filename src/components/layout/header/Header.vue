@@ -23,11 +23,11 @@ import { ref, toRefs } from 'vue'
 // 获取菜单栏数据
 import { useMenu } from './useMenu'
 import type { IMenus } from "./useMenu";
-const { menus, click } = useMenu()
-
+import { useIsMobileStore } from "@/store/m_check";
 import { useCurIdxStore, userCurIdx } from "@/store/cur_idx";
-const { curIdx } = toRefs(useCurIdxStore());
 
+const { menus, click } = useMenu()
+const { curIdx } = toRefs(useCurIdxStore());
 const changeMenu = (item:IMenus, index: number) => {
     click(item)
     curIdx.value = index
@@ -35,7 +35,6 @@ const changeMenu = (item:IMenus, index: number) => {
 }
 // 点击显隐菜单栏（移动端）
 const isShowMenu = ref(false)
-import { useIsMobileStore } from "@/store/m_check";
 const { isMobile } = toRefs(useIsMobileStore())
 const handleLogoBtn = () => {
     if(isMobile.value === true) {

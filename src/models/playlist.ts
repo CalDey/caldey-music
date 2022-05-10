@@ -218,7 +218,7 @@ export interface PlaylistHighqualityTag {
 
 // 相似歌单推荐
 export interface PlaylistRelated {
-    createor: PlaylistRelatedCreateor,
+    creator: PlaylistRelatedCreateor,
     coverImgUrl: string,
     name: string,
     id: string

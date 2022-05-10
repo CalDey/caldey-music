@@ -29,10 +29,10 @@
 import { onMounted, toRefs } from "vue";
 import { useVideoStore } from "@/store/video";
 import CoverItem from "@/components/common/CoverItem.vue";
+import { useIsMobileStore } from "@/store/m_check";
+
 const { personalizedMv } = toRefs(useVideoStore())
 const { getPersonalizedMv } = useVideoStore()
-
-import { useIsMobileStore } from "@/store/m_check";
 const { isMobile } = toRefs(useIsMobileStore())
 
 onMounted(async() => {
