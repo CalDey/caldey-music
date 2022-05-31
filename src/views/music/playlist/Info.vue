@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center lg:flex-row w-full">
         <el-image :src="playlist.coverImgUrl" lazy class="w-44 h-44 object-cover rounded-xl flex-shrink-0"></el-image>
         <div class="px-4 flex flex-col items-center lg:items-baseline">
-            <span class="mt-4 lg:mt-0 text-2xl font-bold">{{ playlist.name }}</span>
+            <span class="mt-4 lg:mt-0 text-2xl text-center font-bold">{{ playlist.name }}</span>
             <div class="mt-2 flex items-center text-xs text-slate-600">
                 <el-avatar :src="playlist.creator.avatarUrl" size="small" round class="flex-shrink-0" />
                 <span class="ml-2">{{ playlist.creator.nickname }}</span>

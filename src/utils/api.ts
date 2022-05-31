@@ -5,6 +5,7 @@ import type { TopListDetail } from "@/models/toplist_detail";
 import type { PlaylistHighqualityTag, PlayListDetail, PlayListDetailSubscribers, PlaylistRelated, PlaylistHotComments } from "@/models/playlist";
 import type { Song } from "@/models/song";
 import type { SongUrl } from "@/models/song_url";
+import type { Lyric } from "@/models/lyric";
 
 // Banner
 export async function useBanner() {
@@ -77,14 +78,22 @@ export async function usePlayListComment(id: number) {
     return hotComments
 }
 
+// 获取歌曲详情
 export async function useDetail(id: number) {
-    const {songs} = await http.get<{ songs: Song[] }>('/song/detail', {ids: id})
+    const { songs } = await http.get<{ songs: Song[] }>('/song/detail', {ids: id})
     // console.log(songs[0])
     return songs[0]
 }
 
+// 获取音乐url
 export async function useSongUrl(id: number) {
-    const {data} = await http.get<{ data: SongUrl[] }>('/song/url', {id: id})
+    const { data } = await http.get<{ data: SongUrl[] }>('/song/url', {id: id})
     // console.log(data[0])
     return data[0]
+}
+
+// 获取歌曲歌词
+export async function useLyric(id: number) {
+    const { lrc } = await http.get<{ lrc: Lyric[] }>('/lyric', {id: id})
+    return lrc
 }

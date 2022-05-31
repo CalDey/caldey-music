@@ -14,7 +14,7 @@
                     </template>
                 </el-skeleton>
             </div>
-            <el-table :data="songs" :header-cell-style="{background: 'rgba(153,153,153,.1)'}" class="w-full mt-10 mb-0 lg:mb-20">
+            <el-table v-if="playlist && songs.length > 0" :data="songs" :header-cell-style="{background: 'rgba(153,153,153,.1)'}" class="w-full mt-10 mb-0 lg:mb-20">
                 <el-table-column  align="center" width="60" >
                     <template #default="scope">
                         <div v-if="scope.row.id === id" class="w-full flex justify-center">
@@ -26,7 +26,10 @@
                                 <div class="line" style="animation-delay: -0.6s!important;"></div>
                             </div>
                         </div>
-                        <span v-else class="cursor-pointer" @click="play(scope.row.id)">{{scope.$index + 1}}</span>
+                        <div v-else class="cursor-pointer hover-icon flex justify-center" @click="play(scope.row.id)">
+                            <span class="hover-icon-1 text-center">{{scope.$index + 1}}</span>
+                            <icon-svg class="w-6 h-6 flex justify-center hover-icon-2" icon-name="#icon-bofang"></icon-svg>
+                        </div>
                     </template>
                 </el-table-column>
                 <el-table-column prop="name" label="歌曲" align="center" />
@@ -77,6 +80,10 @@
                                 <span class="text-slate-400 ml-2 text-xs">{{moment(item.time).fromNow()}}</span>
                             </div>
                             <div class="text-xs p-2 mt-2 bg-slate-100 card-radius">{{item.content}}</div>
+                            <div class="mt-2 flex items-center text-xs">
+                                <icon-svg class="w-4 h-4" icon-name="#icon-zan"></icon-svg>
+                                <span class="ml-1">{{item.likedCount}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,6 +170,13 @@ onMounted(async() => {
         animation: play .9s linear infinite alternate!important;
     }
 }
+
+.hover-icon-2 {
+    display: none;
+}
+
+.hover-icon:hover .hover-icon-1 { display: none; }
+.hover-icon:hover .hover-icon-2 { display: block; }
 
 @keyframes play {
 	0% {

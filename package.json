@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "element-plus": "^2.1.11",
+    "lyric-parser": "^1.0.1",
     "moment": "^2.29.3",
     "pinia": "^2.0.13",
     "pinia-plugin-persist": "^1.0.0",

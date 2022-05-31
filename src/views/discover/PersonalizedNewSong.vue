@@ -5,7 +5,7 @@
         </div>
         <div v-if="personalizedNewSong.length > 0" class="lg:flex lg:flex-wrap">
             <div v-for="(item, index) in personalizedNewSong" :key="index" class="flex items-center w-full lg:w-1/2 my-2 cursor-pointer hover:bg-slate-100">
-                <img class="w-14" :src="item.picUrl">
+                <img class="w-14" :src="item.picUrl" @click="play(item.id)">
                 <div class="flex flex-col ml-2 text-md">
                     <span>{{item.name}}</span>
                     <span class="text-sm text-slate-400">{{item.song.artists[0].name}}</span>
@@ -30,8 +30,12 @@
 <script setup lang="ts">
 import { onMounted, toRefs } from "vue";
 import { useMusicStore } from "@/store/music";
+import {usePlayerStore} from "@/store/player";
+
 const { personalizedNewSong } = toRefs(useMusicStore())
 const { getPersonalizedNewSong } = useMusicStore()
+const { play } = usePlayerStore()
+
 onMounted(async() => {
     await getPersonalizedNewSong()
 })

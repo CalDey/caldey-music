@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col lg:flex-row items-center border-b">
-        <div class="flex items-center mr-8 cursor-pointer" @click="handleLogoBtn">
-            <svg class="w-12 h-12 ml-4" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M598.4 831.872H328.192a256 256 0 0 1-34.496-510.528A352 352 0 1 1 598.4 831.872zm-271.36-64h272.256a288 288 0 1 0-248.512-417.664L335.04 381.44l-34.816 3.584a192 192 0 0 0 26.88 382.848z"></path></svg>
+        <div class="flex items-center mr-0 lg:mr-8 cursor-pointer" @click="handleLogoBtn">
+            <svg class="w-12 h-12 ml-0 lg:ml-4" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M598.4 831.872H328.192a256 256 0 0 1-34.496-510.528A352 352 0 1 1 598.4 831.872zm-271.36-64h272.256a288 288 0 1 0-248.512-417.664L335.04 381.44l-34.816 3.584a192 192 0 0 0 26.88 382.848z"></path></svg>
             <div class="ml-2 font-bold" style="width:130px;">CalDey Music🎵</div>
         </div>
         <ul :class="[isShowMenu == false && isMobile == true ? 'hidden' : '']" class="flex flex-col mt-2 lg:flex-row lg:mt-0 flex-1 w-screen lg:w-0 border-b lg:border-b-0">

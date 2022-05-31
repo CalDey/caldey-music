@@ -7,6 +7,7 @@ import '@/assets/base.scss'    // 引入tailwind css文件
 import moment from 'moment' // moment.js
 import 'moment/dist/locale/zh-cn'   // 引入本土化
 import IconSvg from '@/components/common/IconSvg.vue'
+import 'element-plus/theme-chalk/src/message.scss'
 
 const app = createApp(App)
 const pinia = createPinia()

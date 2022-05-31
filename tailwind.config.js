@@ -6,6 +6,12 @@ module.exports = {
     theme: {
         extend: {
             important: true,
+            animation: {
+                'spin-slow': 'spin 30s linear infinite'
+            },
+            spacing: {
+                '112': '28rem'
+            }
         },
     },
     plugins: [],

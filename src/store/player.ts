@@ -1,9 +1,11 @@
 import { defineStore, storeToRefs } from "pinia";
 import { onMounted, onUnmounted, toRefs, watch } from "vue";
-import { useDetail, useSongUrl } from "@/utils/api";
+import { useDetail, useSongUrl, useLyric } from "@/utils/api";
 import type { Song } from "@/models/song";
 import type { SongUrl } from "@/models/song_url";
 import { formatSec } from '@/utils/number'
+import { ElMessage } from 'element-plus'
+import LyricParser from 'lyric-parser'
 
 const KEYS = {
     volume: 'PLAYER-VOLUME'
@@ -29,6 +31,7 @@ export const usePlayerStore = defineStore({
         muted: false, // 是否静音
         currentTime: 0, // 当前播放时间
         duration: 0, // 总播放时长
+        currentLyric: null, // 解析后歌词数据
     }),
     getters: {
         playListCount: state => {
@@ -91,6 +94,7 @@ export const usePlayerStore = defineStore({
                 this.duration = 0;
             }, 500)
         },
+        // 播放
         async play(id: number) {
             if (id == this.id) return;
             this.isPlaying = false
@@ -108,7 +112,21 @@ export const usePlayerStore = defineStore({
                 this.songDetail()
             }).catch(res => {
                 console.log(res)
+                ElMessage.error({
+                    showClose: true,
+                    message: '抱歉，该歌曲无法正常播放',
+                })
             })
+        },
+        // 获取歌词
+        async getLyric(id:number) {
+            const lyricData = await useLyric(id)
+            const lyric = JSON.parse(JSON.stringify(lyricData)).lyric
+            return lyric
+        },
+        // 缓存歌词
+        saveLyric(currentLyric:any) {
+            this.currentLyric = currentLyric
         },
         //播放结束
         playEnd() {
@@ -135,6 +153,9 @@ export const usePlayerStore = defineStore({
         rePlay() {
             setTimeout(() => {
                 this.currentTime = 0;
+                if(this.currentLyric) {
+                    (this.currentLyric as any).seek(0)
+                }
                 this.audio.play()
             }, 1500)
         },
@@ -201,9 +222,10 @@ export const usePlayerStore = defineStore({
         },
         // 修改播放时间
         onSliderChange(val: number) {
-            this.currentTime = val
+            this.currentTime = val;
             this.sliderInput = false;
-            this.audio.currentTime = val
+            this.audio.currentTime = val;
+            (this.currentLyric as any).seek(this.currentTime * 1000)
         },
         // 播放时间拖动中
         onSliderInput(val: number) {
