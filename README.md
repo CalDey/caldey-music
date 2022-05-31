@@ -34,9 +34,20 @@ http://182.92.202.161:3003/#/
   <img width="299" alt="截屏2022-05-10 下午5 00 42" src="https://user-images.githubusercontent.com/56568751/167591229-9d15c089-15e2-4b14-9f7a-318280710922.png">
   <div>移动端 歌单详情</div>
 </div>
+<div>
+  <img width="1430" alt="截屏2022-05-31 下午2 15 40" src="https://user-images.githubusercontent.com/56568751/171105551-98681bd4-d0b1-4a22-a133-aceb1126bbb2.png">
+  <div>PC端 歌词</div>
+</div>
+<div>
+  <img width="294" alt="截屏2022-05-31 下午2 16 01" src="https://user-images.githubusercontent.com/56568751/171105620-050c3df5-27d8-4d11-b3b8-ba69553dff07.png">
+  <div>移动端 歌词</div>
+</div>
 
 # 说明
 该项目还处于开发阶段，demo可能存在部分bug，全部功能开发完毕后会进行统一修复
+
+# 更新日志
+22/05/31 - 新增歌词功能，修复部分样式bug
 
 # 项目运行
 ```
