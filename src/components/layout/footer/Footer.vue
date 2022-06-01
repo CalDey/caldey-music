@@ -5,7 +5,7 @@
             <div class="flex justify-between items-center z-20">
                 <div class="absolute w-full h-full z-20" style="background: rgba(255,255,255, .8)"></div>
                 <div class="flex">
-                    <el-image class="w-11 h-11 rounded z-20" :src="song.al?.picUrl"></el-image>
+                    <el-image class="w-11 h-11 rounded z-20 flex-shrink-0" :src="song.al?.picUrl"></el-image>
                     <div class="ml-2 z-20 w-20 md:w-full">
                         <div class="truncate">{{song.name}}</div>
                         <div class="text-xs text-slate-400 truncate">{{song.ar[0].name || 'null'}}</div>
