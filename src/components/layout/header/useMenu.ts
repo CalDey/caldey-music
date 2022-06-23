@@ -22,7 +22,7 @@ export function useMenu() {
         },
         {
             name: '歌手',
-            key: 'Singer'
+            key: 'Artist'
         },
         {
             name: '视频',

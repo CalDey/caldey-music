@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-20">
         <div class="safe-container">
             <!-- 官方榜 -->
             <div class="flex items-center">

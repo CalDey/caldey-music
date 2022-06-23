@@ -40,6 +40,38 @@ const router = createRouter({
                         keepAlive: true
                     }
                 },
+                {
+                    path: '/artist',
+                    name: 'Artist', // 歌手列表
+                    component: () => import("@/views/artist/Artist.vue"),
+                    meta: {
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: '/artistDetail',
+                    name: 'artistDetail', // 歌手列表
+                    component: () => import("@/views/artist/ArtistDetail.vue"),
+                    meta: {
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: '/album',
+                    name: 'album', // 歌手专辑
+                    component: () => import("@/views/artist/Album.vue"),
+                    meta: {
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: '/search',
+                    name: 'search', // 歌手专辑
+                    component: () => import("@/views/search/Search.vue"),
+                    meta: {
+                        keepAlive: true
+                    }
+                },
             ]
         },
     ]

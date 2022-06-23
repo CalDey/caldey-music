@@ -7,7 +7,7 @@
         </div>
         <div v-if="personalizedMv.length > 0" class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
             <div v-for="(item, index) in personalizedMv" :key="index">
-                <CoverItem :img-url="item.picUrl" video />
+                <CoverItem :img-url="item.picUrl" :play-count="item.playCount" show-play-count video />
                 <div class="truncate text-xs mt-2">{{item.name}}</div>
                 <div class="truncate text-xs mt-1.5 text-slate-400"><small>{{ item.artistName }}</small></div>
             </div>

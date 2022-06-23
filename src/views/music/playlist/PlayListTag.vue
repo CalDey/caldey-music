@@ -1,7 +1,7 @@
 <template>
     <div v-if="tags" class="safe-container">
         <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-6 gap-5">
-            <div class="tag-container card-radius" :class="clickIndex === -1 ? 'bg-green-200 text-white' : 'bg-slate-200'" @click="tagClick('全部', -1)">全部</div>
+            <div class="tag-container card-radius" :class="clickIndex === -1 ? 'bg-red-300 text-white' : 'bg-slate-200'" @click="tagClick('全部', -1)">全部</div>
             <div v-for="(tag, index) in tags" :key="tag.id" class="tag-container card-radius" :class="clickIndex === index ? 'bg-green-200 text-white' : 'bg-slate-200'" @click="tagClick(tag.name, index)">
                 {{tag.name}}
             </div>

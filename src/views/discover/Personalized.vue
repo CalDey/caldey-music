@@ -9,12 +9,18 @@
                 <div class="truncate text-xs mt-2">{{item.name}}</div>
             </div>
         </div>
-        <div v-else class="grid grid-flow-row grid-cols-4 gap-5">
+        <div v-else class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
             <div v-for="(item, index) in 8" :key="index">
                 <el-skeleton animated>
                     <template #template>
-                        <el-skeleton-item variant="image" style="width: 20vw; height:20vw;" />
-                        <el-skeleton class="mt-2" :rows="0" />
+                            <div v-if="isMobile">
+                                <el-skeleton-item variant="image" style="width: 45vw; height:45vw;" />
+                                <el-skeleton class="mt-2" :rows="0" />
+                            </div>
+                            <div v-else>
+                                <el-skeleton-item variant="image" style="width: 20vw; height:20vw;" />
+                                <el-skeleton class="mt-2" :rows="0" />
+                            </div>
                     </template>
                 </el-skeleton>
             </div>
@@ -27,6 +33,8 @@ import { useRouter } from "vue-router";
 import { onMounted, toRefs } from "vue";
 import CoverItem from "@/components/common/CoverItem.vue";
 import { useMusicStore } from "@/store/music";
+import { useIsMobileStore } from "@/store/m_check";
+const { isMobile } = toRefs(useIsMobileStore());
 const { personalized } = toRefs(useMusicStore());
 const { getPersonalized } = useMusicStore();
 
