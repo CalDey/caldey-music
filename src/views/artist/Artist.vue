@@ -2,7 +2,6 @@
     <div class="safe-container">
         <!-- 筛选条件 -->
         <div class="flex items-center py-4 overflow-y-auto" v-for="option in options" :key="option.key">
-            <!-- <span class="text-slate-400 flex-shrink-0">{{option.name}}:</span> -->
             <div class="mr-4 px-1 rounded-md text-sm flex-shrink-0 cursor-pointer" v-for="item in option.list" :key="item.key"
             :class="(item.key===pageData.type && option.key==='type') || (item.key===pageData.area && option.key==='area') || (item.key===pageData.initial && option.key==='initial') ? 'bg-red-300 text-white' : ''"
             @click="changeOptions(option.key, item.key)">{{item.name}}</div>
@@ -10,7 +9,15 @@
         <!-- 歌手列表 -->
         <div v-if="artist.length > 0" class="grid grid-flow-row grid-cols-2 lg:grid-cols-6 cursor-pointer">
             <div class="flex flex-col items-center" v-for="item in artist" :key="item.id" @click="router.push({name: 'artistDetail',query:{id:item.id}})">
-                <el-image class="rounded-full flex-shrink-0" :src="item.img1v1Url+'?param=120y120'"></el-image>
+                <el-image class="rounded-full flex-shrink-0" :src="item.img1v1Url+'?param=120y120'">
+                    <template #placeholder>
+                        <el-skeleton animated>
+                            <template #template>
+                                    <el-skeleton-item variant="circle" style="width: 120px; height: 120px;" />
+                            </template>
+                        </el-skeleton>
+                    </template>
+                </el-image>
                 <span class="my-2">{{item.name}}</span>
             </div>
         </div>
@@ -19,7 +26,7 @@
                     <el-skeleton animated>
                         <template #template>
                                 <el-skeleton-item variant="circle" style="width: 120px; height: 120px;" />
-                                    <el-skeleton class="text-center" :rows="0" />
+                                <el-skeleton class="text-center" :rows="0" />
                         </template>
                     </el-skeleton>
                 </div>

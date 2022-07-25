@@ -10,7 +10,7 @@
                 <el-button round>关注 TA</el-button>
             </div>
             <!-- 歌手简介 -->
-            <div class="mt-4 w-2/3 h-48 overflow-clip overflow-y-scroll text-gray-200">{{artistDetail.artist.briefDesc}}</div>
+            <div class="mt-4 w-2/3 h-48 overflow-clip overflow-y-auto text-gray-200">{{artistDetail.artist.briefDesc}}</div>
             <!-- 单曲/专辑/MV -->
             <div class="mt-8 w-2/3 flex justify-center">
                 <div class="flex flex-col items-center flex-1">

@@ -47,7 +47,7 @@
         </div>
         <div class="w-full lg:w-1/3">
             <!-- 喜欢这个歌单的人 -->
-            <div class=" mt-4 lg:mt-0 border p-4 rounded-md">
+            <div class="mt-4 lg:mt-0 border p-4 rounded-md">
                 <span class="border-l-4 border-red-400 pl-2">喜欢这个歌单的人</span>
                 <div v-if="subscribers.length > 0">
                     <div class="flex flex-wrap mt-2">
@@ -56,10 +56,10 @@
                 </div>
             </div>
             <!-- 相关推荐 -->
-            <div class=" mt-4 border p-4 rounded-md">
+            <div class="mt-4 border p-4 rounded-md">
                 <span class="border-l-4 border-red-400 pl-2">相关推荐</span>
                 <div v-if="related.length > 0">
-                    <div v-for="item in related" :key="item.id" class="mt-2 flex">
+                    <div v-for="item in related" :key="item.id" class="mt-2 flex cursor-pointer" @click="router.push({name: 'PlaylistDetail', query: {id: item.id}})">
                         <el-image class="w-14 card-radius flex-shrink-0" :src="item.coverImgUrl" />
                         <div class="ml-2 truncate text-sm">
                             <div class="truncate">{{item.name}}</div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <!-- 精彩评论 -->
-            <div class=" mt-4 mb-20 border p-4 rounded-md">
+            <div class="mt-4 mb-20 border p-4 rounded-md">
                 <span class="border-l-4 border-red-400 pl-2">精彩评论</span>
                 <div v-if="comments.length > 0">
                     <div v-for="item in comments" :key="item.commentId" class="mt-2 flex">
@@ -79,7 +79,15 @@
                                 <span>{{item.user.nickname}}</span>
                                 <span class="text-slate-400 ml-2 text-xs">{{moment(item.time).fromNow()}}</span>
                             </div>
-                            <div class="text-xs p-2 mt-2 bg-slate-100 card-radius">{{item.content}}</div>
+                            <div class="text-xs p-2 mt-2 bg-slate-100 card-radius">
+                                <span>{{item.content}}</span>
+                                <div v-if="item.beReplied.length > 0">
+                                    <div v-for="reply in item.beReplied" :key="reply.beRepliedCommentId" class="m-2 p-2 bg-white card-radius text-slate-400">
+                                        <span class="text-red-400 mr-2">@{{reply.user.nickname}}:</span>
+                                        <span>{{reply.content}}</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mt-2 flex items-center text-xs">
                                 <icon-svg class="w-4 h-4" icon-name="#icon-zan"></icon-svg>
                                 <span class="ml-1">{{item.likedCount}}</span>
@@ -87,14 +95,15 @@
                         </div>
                     </div>
                 </div>
+                <div v-else class="text-sm text-slate-400">暂无评论</div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, ref, toRefs, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Info from "@/views/music/playlist/Info.vue";
 import type { PlayListDetail, PlayListDetailSubscribers, PlaylistRelated, PlaylistHotComments } from "@/models/playlist";
 import type { Song } from "@/models/song";
@@ -103,6 +112,7 @@ import { getCurrentInstance } from "vue-demi";
 import {usePlayerStore} from "@/store/player";
 
 const route = useRoute()
+const router = useRouter()
 const playlist = ref<PlayListDetail>()
 const songs = ref<Song[]>([]);
 const subscribers = ref<PlayListDetailSubscribers[]>([])
@@ -149,6 +159,12 @@ const getData = () => {
         comments.value = res
     })
 }
+
+// 实现路由自身跳转
+watch(() => route.params, (toParams, previousParams) => {
+    // console.log('路由改变了')
+    getData()
+})
 
 onMounted(async() => {
     await getData()

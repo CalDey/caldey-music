@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showPlayer" class="p-2 fixed bottom-0 w-full z-20">
+    <div v-if="playerShow" class="p-2 fixed bottom-0 w-full z-20">
         <div class="relative">
             <el-slider :show-tooltip="false" :min="0" :max="duration" v-model="currentTime" @change="onSliderChange" @input="onSliderInput"></el-slider>
             <div class="flex justify-between items-center z-20">
@@ -79,19 +79,19 @@ const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment
 const { song, songUrl, duration, currentTime, onSliderInput,
     onSliderChange, togglePlay, isPause, next, prev,
     loopType, toggleLoop, volume, muted, toggleMuted,
-    setVolume, playListCount, showPlayList } = toRefs(usePlayerStore())
-const showPlayer = ref<boolean>(false)
+    setVolume, playListCount, showPlayList, playerShow } = toRefs(usePlayerStore())
+// const showPlayer = ref<boolean>(false)
 const showLyric = ref<boolean>(false)
 
 const handleClose = () => {
     showLyric.value = false
 }
 
-watch(() => song.value, (val) => {
-    if(val) {
-        showPlayer.value = true
-    }
-})
+// watch(() => song.value, (val) => {
+//     if(val) {
+//         showPlayer.value = true
+//     }
+// })
 </script>
 
 <style lang="scss" scoped>

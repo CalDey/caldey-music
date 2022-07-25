@@ -25,10 +25,6 @@ export function useMenu() {
             key: 'Artist'
         },
         {
-            name: '视频',
-            key: 'Video'
-        },
-        {
             name: 'MV',
             key: 'Mv'
         }

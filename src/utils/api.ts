@@ -10,6 +10,8 @@ import type { Artist } from '@/models/artist'
 import type { ArtistDetail, ArtistDesc } from '@/models/artist_detail'
 import type { Album } from '@/models/Album'
 import type { HotSearch } from '@/models/search'
+import type { Mv, MvUrl, MvDetail, MvDetailInfo, MvHotComments, MvComments, SimiMv } from '@/models/mv'
+import type { VideoUrl, VideoDetail, VideoDetailInfo, VideoHotComments, VideoComments, RelatedVideo } from '@/models/video'
 
 // Banner
 export async function useBanner() {
@@ -171,4 +173,74 @@ export async function useHotSearch() {
 export async function useSearch(keywords: string, limit: number, offset: number = 0, type: number) {
     const { result } = await http.get<{result: any}>('search', {keywords: keywords, limit: limit, offset: offset, type: type})
     return result
+}
+
+// 获取mv列表
+export async function useMvList(pageData: { area: string, type: string, order: string, page: number, limit: number }) {
+    const { data } = await http.get<{ data: Mv[] }>('mv/all', {
+        type: pageData.type,
+        area: pageData.area,
+        order: pageData.order,
+        limit: pageData.limit,
+        offset: (pageData.page - 1) * pageData.limit
+    })
+    return data
+}
+
+// 获取mv url
+export async function useMvUrl(id: number) {
+    const { data } = await http.get<{ data: MvUrl }>("mv/url", {id: id})
+    return data
+}
+
+// 获取mv详情
+export async function useMvDetail(id: number) {
+    const { data } = await http.get<{ data: MvDetail }>("mv/detail", {mvid: id})
+    return data
+}
+
+// 获取mv数据详情
+export async function useMvDetailInfo(id: number) {
+    return await http.get<MvDetailInfo>('mv/detail/info', {mvid: id})
+}
+
+// 获取mv评论
+export async function useMvComments(id: number) {
+    const { hotComments, comments, total } = await http.get<{ hotComments: MvHotComments[], comments: MvComments[], total: number }>('comment/mv?limit=20&offset=0', {id: id})
+    return { hotComments, comments, total }
+}
+
+// 获取相似mv
+export async function useSimiMv(id: number) {
+    const { mvs } = await http.get<{ mvs: SimiMv[] }>("simi/mv", {mvid: id})
+    return mvs
+}
+
+// 获取video url
+export async function useVideoUrl(id: number) {
+    const { urls } = await http.get<{ urls: VideoUrl }>("video/url", {id: id})
+    return urls
+}
+
+// 获取video详情
+export async function useVideoDetail(id: number) {
+    const { data } = await http.get<{ data: VideoDetail }>("video/detail", {id: id})
+    return data
+}
+
+// 获取mv数据详情
+export async function useVideoDetailInfo(id: number) {
+    return await http.get<VideoDetailInfo>('video/detail/info', {vid: id})
+}
+
+// 获取video评论
+export async function useVideoComments(id: number) {
+    const { hotComments, comments, total } = await http.get<{ hotComments: VideoHotComments[], comments: VideoComments[], total: number }>('comment/video?limit=20&offset=0', {id: id})
+    return { hotComments, comments, total }
+}
+
+// 获取相似video
+export async function useRelatedVideo(id: number) {
+    const { data } = await http.get<{ data: RelatedVideo[] }>("related/allvideo", {id: id})
+    return data
 }

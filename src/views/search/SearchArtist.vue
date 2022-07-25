@@ -14,7 +14,15 @@
         <div v-else-if="artist.length === 1">
             <div class="grid grid-flow-row grid-cols-1 lg:grid-cols-1 cursor-pointer">
                 <div class="flex flex-col items-center" v-for="item in artist" :key="item.id" @click="router.push({name: 'artistDetail',query:{id:item.id}})">
-                    <el-image class="rounded-full flex-shrink-0" :src="item.img1v1Url+'?param=120y120'"></el-image>
+                    <el-image class="rounded-full flex-shrink-0" :src="item.img1v1Url+'?param=120y120'">
+                        <template #placeholder>
+                            <el-skeleton animated>
+                                <template #template>
+                                        <el-skeleton-item variant="circle" style="width: 120px; height: 120px;" />
+                                </template>
+                            </el-skeleton>
+                        </template>
+                    </el-image>
                     <span class="my-2">{{item.name}}</span>
                 </div>
             </div>

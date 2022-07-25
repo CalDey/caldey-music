@@ -2,7 +2,7 @@
     <div v-loading="loading" class="safe-container">
         <div v-if="mv.length > 0">
             <div class="grid gird-flow-row grid-cols-2 lg:grid-cols-5 gap-5">
-                <div v-for="(item, index) in mv" :key="index">
+                <div v-for="(item, index) in mv" :key="index" @click="router.push({name: 'mvDetail', query: {id: item.id}})">
                     <CoverItem :img-url="item.imgurl16v9" :play-count="item.playCount" show-play-count video />
                     <div class="truncate text-xs mt-2">{{item.name}}</div>
                 </div>
@@ -17,12 +17,14 @@
 
 <script setup lang="ts">
 import { onMounted, ref, reactive, computed } from 'vue'
+import { useRouter } from "vue-router"
 import { useArtistMv } from "@/utils/api"
 import CoverItem from "@/components/common/CoverItem.vue"
 // import type { PersonalizedMv } from "@/models/personalized"
 const props = defineProps<{
     id: number
 }>()
+const router = useRouter()
 const loading = ref(true)
 const mv = ref<any[]>([])
 const pageData = reactive({

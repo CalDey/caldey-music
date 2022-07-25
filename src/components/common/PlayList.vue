@@ -1,7 +1,7 @@
 <template>
     <el-drawer v-model="showPlayList" title="播放列表" size="320px">
         <div v-for="(song, index) in playList" :key="song.id">
-            <div class="flex my-2">
+            <div class="flex my-2 cursor-pointer">
                 <div v-if="song.id === id" class="flex justify-center mr-4">
                     <div class="play-icon">
                         <div class="line" style="animation-delay: -1.2s!important;"></div>

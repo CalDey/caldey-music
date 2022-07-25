@@ -32,6 +32,7 @@ export const usePlayerStore = defineStore({
         currentTime: 0, // 当前播放时间
         duration: 0, // 总播放时长
         currentLyric: null, // 解析后歌词数据
+        playerShow: false   // 控制播放器显隐
     }),
     getters: {
         playListCount: state => {
@@ -99,11 +100,10 @@ export const usePlayerStore = defineStore({
             if (id == this.id) return;
             this.isPlaying = false
             const data = await useSongUrl(id)
-            console.log(data.id)
+            // console.log(data.id)
             this.audio.src = 'https://music.163.com/song/media/outer/url?id=' + data.id + '.mp3' ;
-            console.log(this.audio.src)
-            console.log(this.audio)
-            // console.log(data)
+            // console.log(this.audio.src)
+            // console.log(this.audio)
             this.audio.play().then(res => {
                 this.isPlaying = true
                 this.songUrl = data
@@ -238,20 +238,38 @@ export const usePlayerStore = defineStore({
                 this.duration = parseInt(this.audio.duration.toString());
                 this.ended = this.audio.ended
             }
+        },
+        // 控制播放器显隐
+        setPlayerShow(val: number) {
+            // val 0:显示 1:隐藏
+            if(val === 0) {
+                this.playerShow = true
+            }else{
+                this.playerShow = false
+            }
         }
     }
 })
 
 export const userPlayerInit = () => {
     let timer: any;
-    const {init, interval, playEnd} = usePlayerStore()
+    const {init, interval, playEnd, setPlayerShow} = usePlayerStore()
 
-    const {ended} = storeToRefs(usePlayerStore())
+    const { ended, song } = storeToRefs(usePlayerStore())
 
     //监听播放结束
     watch(ended, ended => {
         if (!ended) return
         playEnd()
+    })
+
+    // 监听当前歌曲控制播放器显隐
+    watch(song, song => {
+        if(song) {
+            setPlayerShow(0)
+        }else{
+            setPlayerShow(1)
+        }
     })
 
     //启动定时器

@@ -2,7 +2,7 @@
     <div v-loading="loading">
         <div v-if="video.length > 0">
             <div class="grid gird-flow-row grid-cols-2 lg:grid-cols-5 gap-5">
-                <div v-for="(item, index) in video" :key="index">
+                <div v-for="(item, index) in video" :key="index" @click="router.push({name: 'mvDetail', query: {id: item.vid, video: 'true'}})">
                     <CoverItem :img-url="item.coverUrl" :play-count="item.playTime" show-play-count video />
                     <div class="truncate text-xs mt-2">{{item.title}}</div>
                 </div>
@@ -17,6 +17,9 @@
 
 <script setup lang="ts">
 import {} from 'vue'
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 const props = defineProps<{
     video: any
     loading: boolean

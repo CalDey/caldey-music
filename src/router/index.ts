@@ -66,11 +66,21 @@ const router = createRouter({
                 },
                 {
                     path: '/search',
-                    name: 'search', // 歌手专辑
+                    name: 'search', // 搜索
                     component: () => import("@/views/search/Search.vue"),
                     meta: {
                         keepAlive: true
                     }
+                },
+                {
+                    path: '/mvDetail',
+                    name: 'mvDetail', // mv详情页
+                    component: () => import("@/views/mv/mvDetail.vue"),
+                },
+                {
+                    path: '/mv',
+                    name: 'Mv', // mv
+                    component: () => import("@/views/mv/Mv.vue"),
                 },
             ]
         },
