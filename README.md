@@ -1,9 +1,9 @@
 # caldey-music
 使用Vue3+TS+Pinia+TailWindCSS+Element Plus开发一个简约风格的响应式音乐播放网站，通过TailwindCSS实现了PC端/移动端响应式布局，全局适配骨架屏
-已完成50%功能，登录功能，歌曲搜索，歌词，MV等功能暂未开放
 
 # 接口文档
-该项目使用[网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/)，可参考文档部署接口，推荐使用`Vercel`进行部署
+该项目使用[网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/)，可参考文档部署接口，推荐使用`Vercel`进行部署\
+`如果卡在骨架屏没有加载出数据，说明接口被🧱了，挂🪜可以正常访问`
 
 # 在线预览Demo
 http://182.92.202.161:3003/#/
