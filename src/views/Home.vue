@@ -1,9 +1,9 @@
 <template>
-    <div class="h-full overflow-hidden">
-        <Header />
-        <RouterView />
-        <Footer />
-    </div>
+  <div class="h-full overflow-hidden">
+    <Header />
+    <RouterView />
+    <Footer />
+  </div>
 </template>
 
 <script setup lang="ts">

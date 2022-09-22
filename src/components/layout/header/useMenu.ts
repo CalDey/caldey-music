@@ -32,9 +32,9 @@ export function useMenu() {
 
     const router = useRouter();
 
-    const click = async(menus: IMenus) => {
+    const click = async (menus: IMenus) => {
         // console.log(menus.key)
-        await router.push({name: menus.key})
+        await router.push({ name: menus.key })
     }
 
     return {

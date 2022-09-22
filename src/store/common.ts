@@ -7,8 +7,8 @@ export const useCommonStore = defineStore('common', () => {
     // banner
     const banners = ref<Banner[]>([]);
 
-    const getBanners = async() => {
-        if(banners.value.length) return;
+    const getBanners = async () => {
+        if (banners.value.length) return;
         banners.value = await useBanner();
     }
 

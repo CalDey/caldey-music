@@ -1,10 +1,10 @@
 <template>
-    <div class="mb-20">
-        <Banner />
-        <Personalized />
-        <PersonalizedNewSong />
-        <Mv />
-    </div>
+  <div class="mb-20">
+    <Banner />
+    <Personalized />
+    <PersonalizedNewSong />
+    <Mv />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -15,5 +15,4 @@ import Mv from "@/views/discover/Mv.vue";
 </script>
 
 <style scoped>
-
 </style>

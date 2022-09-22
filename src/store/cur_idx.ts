@@ -1,4 +1,4 @@
-import {defineStore, storeToRefs} from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 
 export const useCurIdxStore = defineStore({
     id: 'curIdx',
@@ -10,9 +10,9 @@ export const useCurIdxStore = defineStore({
         enabled: true,
         strategies: [
             {
-              storage: localStorage,
+                storage: localStorage,
             }
-          ]
+        ]
     }
 })
 

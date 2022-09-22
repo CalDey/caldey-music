@@ -15,19 +15,19 @@ export const userCheckMobile = () => {
 
     onMounted(() => {
         screenWidth.value = document.documentElement.clientWidth
-        if(screenWidth.value <= 1024) {
+        if (screenWidth.value <= 1024) {
             isMobile.value = true
             carouselHeight.value = (Math.floor((screenWidth.value * 420) / 1080)) + 'px'
-        }else {
+        } else {
             isMobile.value = false
         }
         window.onresize = () => {
             screenWidth.value = document.documentElement.clientWidth
             // console.log(screenWidth.value)
-            if(screenWidth.value <= 1024) {
+            if (screenWidth.value <= 1024) {
                 isMobile.value = true
                 carouselHeight.value = (Math.floor((screenWidth.value * 420) / 1080)) + 'px'
-            }else {
+            } else {
                 isMobile.value = false
             }
         }

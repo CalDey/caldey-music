@@ -51,9 +51,9 @@ export const usePlayerStore = defineStore({
             }
         },
         prevSong(state): Song {
-            const {thisIndex} = this
+            const { thisIndex } = this
             if (thisIndex === 0) {
-                return state.playList[state.playList.length-1]
+                return state.playList[state.playList.length - 1]
             } else {
                 const prevIndex: number = thisIndex - 1
                 return state.playList[prevIndex];
@@ -101,7 +101,7 @@ export const usePlayerStore = defineStore({
             this.isPlaying = false
             const data = await useSongUrl(id)
             // console.log(data.id)
-            this.audio.src = 'https://music.163.com/song/media/outer/url?id=' + data.id + '.mp3' ;
+            this.audio.src = 'https://music.163.com/song/media/outer/url?id=' + data.id + '.mp3';
             // console.log(this.audio.src)
             // console.log(this.audio)
             this.audio.play().then(res => {
@@ -119,13 +119,13 @@ export const usePlayerStore = defineStore({
             })
         },
         // 获取歌词
-        async getLyric(id:number) {
+        async getLyric(id: number) {
             const lyricData = await useLyric(id)
             const lyric = JSON.parse(JSON.stringify(lyricData)).lyric
             return lyric
         },
         // 缓存歌词
-        saveLyric(currentLyric:any) {
+        saveLyric(currentLyric: any) {
             this.currentLyric = currentLyric
         },
         //播放结束
@@ -153,7 +153,7 @@ export const usePlayerStore = defineStore({
         rePlay() {
             setTimeout(() => {
                 this.currentTime = 0;
-                if(this.currentLyric) {
+                if (this.currentLyric) {
                     (this.currentLyric as any).seek(0)
                 }
                 this.audio.play()
@@ -173,7 +173,7 @@ export const usePlayerStore = defineStore({
         },
         // 随机播放
         randomPlay() {
-            this.play(this.playList[Math.ceil(Math.random() * this.playList.length -1)].id)
+            this.play(this.playList[Math.ceil(Math.random() * this.playList.length - 1)].id)
         },
         //播放、暂停
         togglePlay() {
@@ -242,9 +242,9 @@ export const usePlayerStore = defineStore({
         // 控制播放器显隐
         setPlayerShow(val: number) {
             // val 0:显示 1:隐藏
-            if(val === 0) {
+            if (val === 0) {
                 this.playerShow = true
-            }else{
+            } else {
                 this.playerShow = false
             }
         }
@@ -253,7 +253,7 @@ export const usePlayerStore = defineStore({
 
 export const userPlayerInit = () => {
     let timer: any;
-    const {init, interval, playEnd, setPlayerShow} = usePlayerStore()
+    const { init, interval, playEnd, setPlayerShow } = usePlayerStore()
 
     const { ended, song } = storeToRefs(usePlayerStore())
 
@@ -265,9 +265,9 @@ export const userPlayerInit = () => {
 
     // 监听当前歌曲控制播放器显隐
     watch(song, song => {
-        if(song) {
+        if (song) {
             setPlayerShow(0)
-        }else{
+        } else {
             setPlayerShow(1)
         }
     })

@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
 // 设置请求头和请求路径
-axios.defaults.baseURL = 'https://netease-cloud-music-g6mz4jiyx-caldey.vercel.app'
+// axios.defaults.baseURL = 'https://netease-cloud-music-g6mz4jiyx-caldey.vercel.app'
+axios.defaults.baseURL = 'http://182.92.202.161:4000/'
 axios.defaults.timeout = 20 * 1000;
 axios.defaults.maxBodyLength = 5 * 1024 * 1024;
 axios.defaults.withCredentials = true;
