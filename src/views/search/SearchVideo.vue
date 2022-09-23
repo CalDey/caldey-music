@@ -1,53 +1,53 @@
 <template>
-  <div v-loading="loading">
-    <div v-if="video.length > 0">
-      <div class="grid gird-flow-row grid-cols-2 lg:grid-cols-5 gap-5">
-        <div
-          v-for="(item, index) in video"
-          :key="index"
-          @click="
-            router.push({
-              name: 'mvDetail',
-              query: { id: item.vid, video: 'true' },
-            })
-          "
-        >
-          <CoverItem
-            :img-url="item.coverUrl"
-            :play-count="item.playTime"
-            show-play-count
-            video
-          />
-          <div class="truncate text-xs mt-2">{{ item.title }}</div>
+    <div v-loading="loading">
+        <div v-if="video.length > 0">
+            <div class="grid gird-flow-row grid-cols-2 lg:grid-cols-5 gap-5">
+                <div
+                    v-for="(item, index) in video"
+                    :key="index"
+                    @click="
+                        router.push({
+                            name: 'mvDetail',
+                            query: { id: item.vid, video: 'true' },
+                        })
+                    "
+                >
+                    <CoverItem
+                        :img-url="item.coverUrl"
+                        :play-count="item.playTime"
+                        show-play-count
+                        video
+                    />
+                    <div class="truncate text-xs mt-2">{{ item.title }}</div>
+                </div>
+            </div>
+            <div v-if="pageData.init" class="py-10">
+                <el-button
+                    type="text"
+                    :loading="pageData.loading"
+                    class="w-full"
+                    @click="loadMore(1014)"
+                    >加载更多</el-button
+                >
+            </div>
         </div>
-      </div>
-      <div v-if="pageData.init" class="py-10">
-        <el-button
-          type="text"
-          :loading="pageData.loading"
-          class="w-full"
-          @click="loadMore(1014)"
-          >加载更多</el-button
-        >
-      </div>
+        <el-empty v-else description="暂无数据" />
     </div>
-    <el-empty description="暂无数据" v-else />
-  </div>
 </template>
 
 <script setup lang="ts">
-import {} from "vue";
-import { useRouter } from "vue-router";
+import {} from 'vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const props = defineProps<{
-  video: any;
-  loading: boolean;
-  pageData: any;
+    video: any;
+    loading: boolean;
+    pageData: any;
 }>();
-const emit = defineEmits(["loadMore"]);
+const emit = defineEmits(['loadMore']);
 const loadMore = (type: number) => {
-  emit("loadMore", type);
+    emit('loadMore', type);
 };
 </script>
 

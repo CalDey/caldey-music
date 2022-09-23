@@ -2,12 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {}
+
 @layer components {
     .card-radius {
         @apply rounded-md
     }
-    
     .safe-container {
         @apply mx-8 my-4
+    }
+    // 主题配色
+    .theme-text-color {
+        @apply text-blue-400
+    }
+    .theme-bg-color {
+        @apply bg-blue-300
+    }
+    .theme-border-color {
+        @apply border-blue-400
     }
 }
