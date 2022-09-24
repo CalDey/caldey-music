@@ -1,7 +1,21 @@
 <template>
     <div class="h-full overflow-hidden">
         <Header />
-        <RouterView />
+        <!-- keep-alive 缓存组件 -->
+        <router-view v-slot="{ Component }">
+            <keep-alive>
+                <component
+                    :is="Component"
+                    v-if="$route.meta.keepAlive"
+                    :key="$route.name"
+                />
+            </keep-alive>
+            <component
+                :is="Component"
+                v-if="!$route.meta.keepAlive"
+                :key="$route.name"
+            />
+        </router-view>
         <Footer />
     </div>
 </template>

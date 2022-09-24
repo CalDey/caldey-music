@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mt-4 p-4 w-full h-full lg:h-80 mb-14 lg:mb-0 bg-slate-100 lg:overflow-y-scroll"
+        class="mt-4 p-4 w-full h-full lg:h-96 mb-14 lg:mb-0 bg-slate-100 opacity-60 lg:overflow-y-scroll"
         style="white-space: pre-wrap"
     >
         <div ref="lyricList">
@@ -11,7 +11,7 @@
                     ref="lyricRef"
                     :key="index"
                     class="my-4 text-xs"
-                    :class="currentLyricNum === index ? 'text-red-300' : ''"
+                    :class="currentLyricNum === index ? 'theme-text-color' : ''"
                 >
                     {{ item.txt }}
                 </p>

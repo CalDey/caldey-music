@@ -12,7 +12,7 @@
                 <div
                     v-for="item in topListDetailData.slice(0, 4)"
                     :key="item.id"
-                    class="bg-slate-100 card-radius flex"
+                    class="bg-slate-100 card-radius flex hover:scale-105"
                     @click="
                         router.push({
                             name: 'PlaylistDetail',
@@ -75,7 +75,11 @@
                 v-if="topListDetailData.length > 0"
                 class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5"
             >
-                <div v-for="item in topListDetailData.slice(4)" :key="item.id">
+                <div
+                    v-for="item in topListDetailData.slice(4)"
+                    :key="item.id"
+                    class="hover:scale-105"
+                >
                     <CoverItem
                         :img-url="item.coverImgUrl"
                         @click="

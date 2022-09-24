@@ -2,7 +2,7 @@
     <div v-if="tags" class="safe-container">
         <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-6 gap-5">
             <div
-                class="tag-container card-radius"
+                class="tag-container card-radius hover:scale-105"
                 :class="
                     clickIndex === -1
                         ? 'theme-bg-color text-white'
@@ -15,7 +15,7 @@
             <div
                 v-for="(tag, index) in tags"
                 :key="tag.id"
-                class="tag-container card-radius"
+                class="tag-container card-radius hover:scale-105"
                 :class="
                     clickIndex === index
                         ? 'theme-bg-color text-white'

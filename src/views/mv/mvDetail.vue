@@ -128,7 +128,7 @@
                 <span>Comments ｜ {{ totalComments }}条评论</span>
             </div>
             <!-- 精彩评论 -->
-            <div class="border-l-4 border-red-400 pl-2 my-4">精彩评论</div>
+            <div class="border-l-4 theme-border-color pl-2 my-4">精彩评论</div>
             <div v-if="mvHotComments.length > 0">
                 <div
                     v-for="item in mvHotComments"
@@ -155,7 +155,7 @@
                                     :key="reply.beRepliedCommentId"
                                     class="m-2 p-2 bg-white card-radius text-slate-400"
                                 >
-                                    <span class="text-red-400 mr-2"
+                                    <span class="theme-text-color mr-2"
                                         >@{{ reply.user.nickname }}:</span
                                     >
                                     <span>{{ reply.content }}</span>
@@ -172,9 +172,9 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="text-sm text-slate-400">暂无评论</div>
+            <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
             <!-- 最新评价 -->
-            <div class="border-l-4 border-red-400 pl-2 my-4">最新评论</div>
+            <div class="border-l-4 theme-border-color pl-2 my-4">最新评论</div>
             <div v-if="mvComments.length > 0" class="mb-2">
                 <div
                     v-for="item in mvComments"
@@ -201,7 +201,7 @@
                                     :key="reply.beRepliedCommentId"
                                     class="m-2 p-2 bg-white card-radius text-slate-400"
                                 >
-                                    <span class="text-red-400 mr-2"
+                                    <span class="theme-text-color mr-2"
                                         >@{{ reply.user.nickname }}:</span
                                     >
                                     <span>{{ reply.content }}</span>
@@ -218,12 +218,14 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="text-sm text-slate-400">暂无评论</div>
+            <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
         </div>
         <div class="w-full lg:w-1/3 mb-20">
             <!-- 视频简介 -->
             <div class="mt-4 lg:mt-0 border p-4 rounded-md">
-                <div class="border-l-4 border-red-400 pl-2 mb-2">视频简介</div>
+                <div class="border-l-4 theme-border-color pl-2 mb-2">
+                    视频简介
+                </div>
                 <div v-if="mvDetail">
                     <span class="text-slate-600 text-sm">{{
                         mvDetail.desc || '暂无内容'
@@ -243,7 +245,9 @@
             </div>
             <!-- 相关推荐 -->
             <div class="mt-4 border p-4 rounded-md">
-                <div class="border-l-4 border-red-400 pl-2 mb-2">相关推荐</div>
+                <div class="border-l-4 theme-border-color pl-2 mb-2">
+                    相关推荐
+                </div>
                 <div v-if="simiMv.length > 0">
                     <div v-for="item in simiMv" :key="item.id">
                         <CoverItem

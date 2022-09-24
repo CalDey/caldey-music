@@ -18,6 +18,7 @@
                 </el-button>
             </div>
             <el-table
+                stripe
                 :data="hotSongsList"
                 :header-cell-style="{ background: 'rgba(153,153,153,.1)' }"
                 class="w-full mb-20"

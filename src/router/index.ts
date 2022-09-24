@@ -81,6 +81,9 @@ const router = createRouter({
                     path: '/mv',
                     name: 'Mv', // mv
                     component: () => import("@/views/mv/Mv.vue"),
+                    meta: {
+                        keepAlive: true
+                    }
                 },
             ]
         },

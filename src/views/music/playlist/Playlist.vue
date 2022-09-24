@@ -16,6 +16,7 @@
                 <div
                     v-for="(item, index) in list"
                     :key="index"
+                    class="hover:scale-105"
                     @click="
                         router.push({
                             name: 'PlaylistDetail',

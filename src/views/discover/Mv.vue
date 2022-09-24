@@ -12,6 +12,7 @@
             <div
                 v-for="(item, index) in personalizedMv"
                 :key="index"
+                class="hover:scale-105"
                 @click="
                     router.push({ name: 'mvDetail', query: { id: item.id } })
                 "

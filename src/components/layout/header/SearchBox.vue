@@ -16,7 +16,7 @@
                     <li
                         v-for="(item, index) in hotSearch"
                         :key="index"
-                        class="mr-2 bg-gray-200 p-1 my-1 rounded-md cursor-pointer hover:text-white hover:theme-bg-color"
+                        class="mr-2 bg-gray-200 p-1 my-1 rounded-md cursor-pointer hover:text-white hover:theme-bg-color hover:scale-105"
                         @click="gotoSearchPage(item.first)"
                     >
                         {{ item.first }}
@@ -57,7 +57,7 @@ const getHotSearchData = async () => {
     } else {
         return;
     }
-    console.log(hotSearch.value);
+    // console.log(hotSearch.value);
 };
 
 const emit = defineEmits<{

@@ -7,7 +7,7 @@
             <div
                 v-for="(item, index) in personalizedNewSong"
                 :key="index"
-                class="flex items-center w-full lg:w-1/2 my-2 cursor-pointer hover:bg-slate-100"
+                class="flex items-center w-full lg:w-1/2 my-2 cursor-pointer hover:bg-slate-100 hover:scale-105"
             >
                 <img class="w-14" :src="item.picUrl" @click="play(item.id)" />
                 <div class="flex flex-col ml-2 text-md">

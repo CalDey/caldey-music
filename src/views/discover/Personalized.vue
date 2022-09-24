@@ -10,6 +10,7 @@
             <div
                 v-for="(item, index) in personalized"
                 :key="index"
+                class="hover:scale-105"
                 @click="
                     router.push({
                         name: 'PlaylistDetail',

@@ -2,7 +2,11 @@
     <div v-loading="loading" class="safe-container">
         <div v-if="album.length > 0">
             <div class="grid gird-flow-row grid-cols-3 lg:grid-cols-5 gap-5">
-                <div v-for="(item, index) in album" :key="index">
+                <div
+                    v-for="(item, index) in album"
+                    :key="index"
+                    class="hover:scale-105"
+                >
                     <CoverItem
                         :img-url="item.picUrl"
                         @click="

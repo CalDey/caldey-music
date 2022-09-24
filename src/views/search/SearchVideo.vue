@@ -21,7 +21,7 @@
                     <div class="truncate text-xs mt-2">{{ item.title }}</div>
                 </div>
             </div>
-            <div v-if="pageData.init" class="py-10">
+            <div v-if="pageData.init" class="py-20">
                 <el-button
                     type="text"
                     :loading="pageData.loading"

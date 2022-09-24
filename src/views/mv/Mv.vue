@@ -27,7 +27,11 @@
             v-if="mv.length > 0"
             class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 cursor-pointer"
         >
-            <div v-for="item in mv" :key="item.id" class="flex-shrink-0 p-2">
+            <div
+                v-for="item in mv"
+                :key="item.id"
+                class="flex-shrink-0 p-2 hover:scale-105"
+            >
                 <CoverItem
                     :img-url="item.cover"
                     :play-count="item.playCount"

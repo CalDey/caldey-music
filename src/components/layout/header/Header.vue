@@ -27,7 +27,7 @@
                 v-for="(item, index) in menus"
                 :key="index"
                 :class="[curIdx === index ? 'theme-text-color' : '']"
-                class="py-4 flex justify-center hover:theme-bg-color hover:text-white select-none"
+                class="py-4 flex justify-center hover:theme-bg-color hover:text-white select-none font-bold"
                 @click="changeMenu(item, index)"
             >
                 {{ item.name }}
@@ -51,7 +51,9 @@
                     ></path>
                 </svg>
             </div>
-            <div class="flex items-center px-8 cursor-pointer select-none">
+            <div
+                class="flex items-center px-8 cursor-pointer select-none font-bold"
+            >
                 <span>登录</span>
             </div>
         </div>

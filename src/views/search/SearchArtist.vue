@@ -7,7 +7,7 @@
                 <div
                     v-for="item in artist"
                     :key="item.id"
-                    class="flex flex-col items-center"
+                    class="flex flex-col items-center mt-8 hover:scale-105"
                     @click="
                         router.push({
                             name: 'artistDetail',
@@ -39,7 +39,7 @@
                 <div
                     v-for="item in artist"
                     :key="item.id"
-                    class="flex flex-col items-center"
+                    class="flex flex-col items-center mt-8 hover:scale-105"
                     @click="
                         router.push({
                             name: 'artistDetail',

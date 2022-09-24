@@ -25,6 +25,7 @@
             </div>
             <el-table
                 v-if="playlist && songs.length > 0"
+                stripe
                 :data="songs"
                 :header-cell-style="{ background: 'rgba(153,153,153,.1)' }"
                 class="w-full mt-10 mb-0 lg:mb-20"
@@ -97,7 +98,7 @@
                             :src="item.avatarUrl"
                             size="default"
                             shape="square"
-                            class="ml-3 mb-2 flex-shrink-0"
+                            class="ml-3 mb-2 flex-shrink-0 hover:scale-105 cursor-pointer"
                         ></el-avatar>
                     </div>
                 </div>
@@ -109,7 +110,7 @@
                     <div
                         v-for="item in related"
                         :key="item.id"
-                        class="mt-2 flex cursor-pointer"
+                        class="mt-2 flex cursor-pointer hover:scale-105"
                         @click="
                             router.push({
                                 name: 'PlaylistDetail',
@@ -178,7 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-else class="text-sm text-slate-400">暂无评论</div>
+                <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
             </div>
         </div>
     </div>
@@ -254,12 +255,15 @@ const getData = () => {
     });
 };
 
-// 实现路由自身跳转
+// 实现路由自身到自身跳转
 watch(
     () => route.params,
     (toParams, previousParams) => {
         // console.log('路由改变了')
-        getData();
+        // 进行路由名称检验，防止keep-alive切换页面时触发watch
+        if(route.name === 'PlaylistDetail') {
+            getData();
+        }
     },
 );
 

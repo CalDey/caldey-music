@@ -2,6 +2,7 @@
     <div v-loading="loading">
         <div v-if="songs.length > 0">
             <el-table
+                stripe
                 :data="songs"
                 :header-cell-style="{ background: 'rgba(153,153,153,.1)' }"
                 class="w-full"
@@ -102,12 +103,12 @@ const emit = defineEmits(['loadMore']);
 const loadMore = (type: number) => {
     emit('loadMore', type);
 };
-const mergeArtists = (artists:any) => {
+const mergeArtists = (artists: any) => {
     if (artists.length <= 1) {
         return artists[0].name;
     } else {
-        let arr:Array<string> = [];
-        artists.forEach((item:any) => {
+        let arr: Array<string> = [];
+        artists.forEach((item: any) => {
             arr.push(item.name);
         });
         return arr.join('/');

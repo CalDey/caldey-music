@@ -1,20 +1,22 @@
 <template>
     <div v-if="artistDetail">
         <Info :artist-detail="artistDetail" />
-        <el-tabs v-model="tab" class="my-4">
-            <el-tab-pane lazy label="歌曲" name="music">
-                <Song :id="id" />
-            </el-tab-pane>
-            <el-tab-pane lazy label="专辑" name="album">
-                <Album :id="id" />
-            </el-tab-pane>
-            <el-tab-pane lazy label="MV" name="mv">
-                <Mv :id="id" />
-            </el-tab-pane>
-            <el-tab-pane lazy label="详情" name="detail">
-                <Desc :id="id" />
-            </el-tab-pane>
-        </el-tabs>
+        <div>
+            <el-tabs v-model="tab" class="my-4">
+                <el-tab-pane lazy label="歌曲" name="music">
+                    <Song :id="id" />
+                </el-tab-pane>
+                <el-tab-pane lazy label="专辑" name="album">
+                    <Album :id="id" />
+                </el-tab-pane>
+                <el-tab-pane lazy label="MV" name="mv">
+                    <Mv :id="id" />
+                </el-tab-pane>
+                <el-tab-pane lazy label="详情" name="detail">
+                    <Desc :id="id" />
+                </el-tab-pane>
+            </el-tabs>
+        </div>
     </div>
 </template>
 
@@ -43,7 +45,7 @@ onMounted(async () => {
     height: 0 !important;
 }
 ::v-deep .el-tabs__item {
-    width: 25vw;
+    width: 24vw;
     text-align: center;
 }
 ::v-deep .el-tabs__active-bar {
