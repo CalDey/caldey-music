@@ -356,10 +356,11 @@ const relatedVideo = ref<RelatedVideo[]>([]);
 
 // 视频页面数据初始化
 const initVideoPage = async () => {
-    // 判断视频类型为video or MV
+    // 根据路由参数判断视频类型为video or MV
     setPause();
     setPlayerShow(1);
-    if (route.query.video) {
+    if (route.query.video === 'true') {    // video
+        console.log(route.query.video)
         id.value = route.query.id; // vid
         video.value = true;
         videoUrl.value = await useVideoUrl(id.value);

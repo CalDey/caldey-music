@@ -8,7 +8,7 @@
                     @click="
                         router.push({
                             name: 'mvDetail',
-                            query: { id: item.vid, video: 'true' },
+                            query: { id: item.vid, video: (isNaN(Number(item.vid))).toString() },
                         })
                     "
                 >
@@ -49,6 +49,11 @@ const emit = defineEmits(['loadMore']);
 const loadMore = (type: number) => {
     emit('loadMore', type);
 };
+
+// const isVideo = (item:string) => {
+//     // Number(item.vid) === NaN ? 123 : ABC
+//     return isNaN(Number(item))
+// }
 </script>
 
 <style lang="scss" scoped></style>
