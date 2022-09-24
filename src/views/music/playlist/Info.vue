@@ -24,7 +24,11 @@
                 <el-tag
                     v-for="(item, index) in playlist.tags"
                     :key="index"
-                    class="mx-1"
+                    class="mx-1 cursor-pointer"
+                    @click="router.push({
+                        name: 'Playlist',
+                        params: { tag: item }
+                    })"
                     >{{ item }}</el-tag
                 >
             </div>
@@ -55,6 +59,7 @@
 import { onMounted, ref } from 'vue';
 import type { PlayListDetail } from '@/models/playlist';
 import { getCurrentInstance } from 'vue-demi';
+import { useRouter } from 'vue-router';
 
 const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const createTime = ref<string>();
@@ -64,8 +69,9 @@ defineProps<{
     playAll?: () => void;
 }>();
 
+const router = useRouter();
+
 onMounted(() => {
-    // console.log(moment().format('LL'))
     createTime.value = moment().format('LL');
 });
 </script>

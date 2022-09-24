@@ -16,7 +16,7 @@
             </div>
             <!-- 歌手简介 -->
             <div
-                class="mt-4 w-2/3 h-48 overflow-clip overflow-y-auto text-gray-200"
+                class="mt-4 w-2/3 h-48 overflow-clip overflow-y-auto text-white"
             >
                 {{ artistDetail.artist.briefDesc }}
             </div>
@@ -26,19 +26,19 @@
                     <span class="text-2xl text-white">{{
                         artistDetail.artist.musicSize
                     }}</span>
-                    <div class="text-sm text-gray-200">单曲数</div>
+                    <div class="text-sm text-white">单曲数</div>
                 </div>
                 <div class="flex flex-col items-center flex-1">
                     <span class="text-2xl text-white">{{
                         artistDetail.artist.albumSize
                     }}</span>
-                    <div class="text-sm text-gray-200">专辑数</div>
+                    <div class="text-sm text-white">专辑数</div>
                 </div>
                 <div class="flex flex-col items-center flex-1">
                     <span class="text-2xl text-white">{{
                         artistDetail.artist.mvSize
                     }}</span>
-                    <div class="text-sm text-gray-200">MV数</div>
+                    <div class="text-sm text-white">MV数</div>
                 </div>
             </div>
         </div>

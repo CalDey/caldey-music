@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PlaylistTag @change-tag="changeTag" />
+        <PlaylistTag @change-tag="changeTag" :selected-tag="selectedTag" />
         <div class="safe-container">
             <div class="flex items-center">
                 <span class="font-bold text-xl mb-4"
@@ -76,8 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { onMounted, reactive, ref, toRefs } from 'vue';
+import { onMounted, reactive, ref, toRefs, onActivated } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import PlaylistTag from '@/views/music/playlist/PlayListTag.vue';
 import CoverItem from '@/components/common/CoverItem.vue';
 import { useIsMobileStore } from '@/store/m_check';
@@ -85,9 +85,10 @@ import type { PlayListDetail } from '@/models/playlist';
 import { useTopPlaylistHighquality } from '@/utils/api';
 const { isMobile } = toRefs(useIsMobileStore());
 
+const route = useRoute();
 const router = useRouter();
-
 const list = ref<PlayListDetail[]>();
+const selectedTag = ref<any>()
 
 const pageData = reactive({
     init: false,
@@ -103,7 +104,6 @@ const changeTag = (tag: string) => {
     pageData.tag = tag;
     pageData.before = 0;
     pageData.more = false;
-
     getData();
 };
 
@@ -129,6 +129,12 @@ const getData = async () => {
 onMounted(() => {
     getData();
 });
+onActivated(() => {
+    if(route.params.tag as string) {
+        selectedTag.value = route.params.tag as string
+        changeTag(route.params.tag as string)
+    }
+})
 </script>
 
 <style scoped></style>

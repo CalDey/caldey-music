@@ -30,21 +30,33 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { usePlaylistHighqualityTags } from '@/utils/api';
 import type { PlaylistHighqualityTag } from '@/models/playlist';
 
-const tags = ref<PlaylistHighqualityTag[]>();
+const props = defineProps<{
+    selectedTag: string
+}>()
 
-const clickIndex = ref<number>(-1);
+// 通过监听父组件传值实现标签跳转同时tag自动高亮
+watch(() => props.selectedTag, (val:string) => {
+    tags.value?.forEach((tag, index) => {
+        if(val === tag.name) {
+            clickIndex.value = index
+        }
+    })
+})
 
 const emit = defineEmits<{
     (e: 'changeTag', tag: string, index: number): void;
 }>();
 
+const tags = ref<PlaylistHighqualityTag[]>();
+const clickIndex = ref<number>(-1);
+
 const tagClick = (tag: string, index: number) => {
     clickIndex.value = index;
-    console.log(clickIndex.value);
+    // console.log(clickIndex.value);
     emit('changeTag', tag, index);
 };
 
