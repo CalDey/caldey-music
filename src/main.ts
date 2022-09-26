@@ -8,6 +8,7 @@ import moment from 'moment' // moment.js
 import 'moment/dist/locale/zh-cn'   // 引入本土化
 import IconSvg from '@/components/common/IconSvg.vue'
 import 'element-plus/theme-chalk/src/message.scss'
+import 'element-plus/theme-chalk/src/message-box.scss'
 
 const app = createApp(App)
 const pinia = createPinia()

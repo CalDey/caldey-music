@@ -1,5 +1,5 @@
 <template>
-    <div v-if="playerShow" class="p-2 fixed bottom-0 w-full z-20">
+    <div v-if="playerShow && song.name" class="p-2 fixed bottom-0 w-full z-20">
         <div class="relative">
             <el-slider
                 v-model="currentTime"
@@ -39,17 +39,29 @@
                     </div>
                     <!-- 播放模式 -->
                     <div class="cursor-pointer z-20">
-                        <icon-svg
-                            class="w-6 h-6"
-                            :icon-name="
+                        <el-tooltip
+                            :content="
                                 loopType === 0
-                                    ? '#icon-danquxunhuan'
+                                    ? '单曲循环'
                                     : loopType === 1
-                                    ? '#icon-liebiaoxunhuan'
-                                    : '#icon-suijibofang'
+                                    ? '列表循环'
+                                    : '随机播放'
                             "
-                            @click="toggleLoop"
-                        ></icon-svg>
+                            placement="top"
+                            trigger="click"
+                        >
+                            <icon-svg
+                                class="w-6 h-6"
+                                :icon-name="
+                                    loopType === 0
+                                        ? '#icon-danquxunhuan'
+                                        : loopType === 1
+                                        ? '#icon-liebiaoxunhuan'
+                                        : '#icon-suijibofang'
+                                "
+                                @click="toggleLoop"
+                            ></icon-svg>
+                        </el-tooltip>
                     </div>
                     <!-- 歌词查看 -->
                     <div class="cursor-pointer ml-2 z-20">
@@ -188,18 +200,11 @@ const {
     showPlayList,
     playerShow,
 } = toRefs(usePlayerStore());
-// const showPlayer = ref<boolean>(false)
-const showLyric = ref<boolean>(false);
 
+const showLyric = ref<boolean>(false);
 const handleClose = () => {
     showLyric.value = false;
 };
-
-// watch(() => song.value, (val) => {
-//     if(val) {
-//         showPlayer.value = true
-//     }
-// })
 </script>
 
 <style lang="scss" scoped>

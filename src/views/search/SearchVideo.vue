@@ -8,7 +8,10 @@
                     @click="
                         router.push({
                             name: 'mvDetail',
-                            query: { id: item.vid, video: (isNaN(Number(item.vid))).toString() },
+                            query: {
+                                id: item.vid,
+                                video: isNaN(Number(item.vid)).toString(),
+                            },
                         })
                     "
                 >

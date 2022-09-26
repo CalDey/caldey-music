@@ -50,11 +50,8 @@ const router = createRouter({
                 },
                 {
                     path: '/artistDetail',
-                    name: 'artistDetail', // 歌手列表
+                    name: 'artistDetail', // 歌手详情
                     component: () => import("@/views/artist/ArtistDetail.vue"),
-                    meta: {
-                        keepAlive: true
-                    }
                 },
                 {
                     path: '/album',

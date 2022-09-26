@@ -59,7 +59,31 @@
                 </el-table-column>
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
-                        {{ mergeArtists(scope.row.ar) }}
+                        <div
+                            v-if="scope.row.ar.length <= 1"
+                            class="cursor-pointer"
+                        >
+                            <span
+                                class="hover:theme-text-color"
+                                @click="gotoSingerPage(scope.row.ar[0].id)"
+                                >{{ scope.row.ar[0].name }}</span
+                            >
+                        </div>
+                        <template v-else>
+                            <span
+                                v-for="(item, index) in scope.row.ar"
+                                :key="index"
+                                class="cursor-pointer"
+                            >
+                                <span v-if="index !== 0">/</span>
+                                <span
+                                    class="hover:theme-text-color"
+                                    @click="gotoSingerPage(item.id)"
+                                    >{{ item.name }}</span
+                                >
+                            </span>
+                        </template>
+                        <!-- {{ mergeArtists(scope.row.ar) }} -->
                     </template>
                 </el-table-column>
                 <!-- <el-table-column label="专辑" align="center">
@@ -91,8 +115,10 @@
 import { onMounted, toRefs } from 'vue';
 import { getCurrentInstance } from 'vue-demi';
 import { usePlayerStore } from '@/store/player';
+import { useRouter } from 'vue-router';
 const { play } = usePlayerStore();
 const { id } = toRefs(usePlayerStore());
+const router = useRouter();
 const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const props = defineProps<{
     songs: any;
@@ -103,16 +129,10 @@ const emit = defineEmits(['loadMore']);
 const loadMore = (type: number) => {
     emit('loadMore', type);
 };
-const mergeArtists = (artists: any) => {
-    if (artists.length <= 1) {
-        return artists[0].name;
-    } else {
-        let arr: Array<string> = [];
-        artists.forEach((item: any) => {
-            arr.push(item.name);
-        });
-        return arr.join('/');
-    }
+
+// 点击歌手跳转歌手详情页
+const gotoSingerPage = (id: number) => {
+    router.push({ name: 'artistDetail', query: { id: id } });
 };
 </script>
 

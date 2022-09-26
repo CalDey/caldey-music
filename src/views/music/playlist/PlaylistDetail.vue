@@ -74,7 +74,30 @@
                 <el-table-column prop="name" label="歌曲" align="center" />
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
-                        {{ scope.row.ar[0].name }}
+                        <div
+                            v-if="scope.row.ar.length <= 1"
+                            class="cursor-pointer"
+                        >
+                            <span
+                                class="hover:theme-text-color"
+                                @click="gotoSingerPage(scope.row.ar[0].id)"
+                                >{{ scope.row.ar[0].name }}</span
+                            >
+                        </div>
+                        <template v-else>
+                            <span
+                                v-for="(item, index) in scope.row.ar"
+                                :key="index"
+                                class="cursor-pointer"
+                            >
+                                <span v-if="index !== 0">/</span>
+                                <span
+                                    class="hover:theme-text-color"
+                                    @click="gotoSingerPage(item.id)"
+                                    >{{ item.name }}</span
+                                >
+                            </span>
+                        </template>
                     </template>
                 </el-table-column>
                 <el-table-column label="时长" align="center">
@@ -224,6 +247,16 @@ const click = (id: any) => {
     console.log(id);
 };
 
+// 路由跳转后自动定位到顶部
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0);
+});
+
+// 点击歌手跳转歌手详情页
+const gotoSingerPage = (id: number) => {
+    router.push({ name: 'artistDetail', query: { id: id } });
+};
+
 // 播放全部
 const playAll = () => {
     pushPlayList(true, ...songs.value);
@@ -261,7 +294,7 @@ watch(
     (toParams, previousParams) => {
         // console.log('路由改变了')
         // 进行路由名称检验，防止keep-alive切换页面时触发watch
-        if(route.name === 'PlaylistDetail') {
+        if (route.name === 'PlaylistDetail') {
             getData();
         }
     },

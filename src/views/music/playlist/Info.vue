@@ -25,16 +25,20 @@
                     v-for="(item, index) in playlist.tags"
                     :key="index"
                     class="mx-1 cursor-pointer"
-                    @click="router.push({
-                        name: 'Playlist',
-                        params: { tag: item }
-                    })"
+                    @click="
+                        router.push({
+                            name: 'Playlist',
+                            params: { tag: item },
+                        })
+                    "
                     >{{ item }}</el-tag
                 >
             </div>
-            <span class="mt-2 text-center lg:text-left w-80 truncate">{{
-                playlist.description
-            }}</span>
+            <span
+                class="mt-2 text-center lg:text-left w-80 truncate cursor-pointer select-none"
+                @click="showDesc(playlist.description)"
+                >{{ playlist.description }}</span
+            >
             <div class="mt-2">
                 <el-button type="primary" round @click="playAll">
                     <svg
@@ -60,6 +64,7 @@ import { onMounted, ref } from 'vue';
 import type { PlayListDetail } from '@/models/playlist';
 import { getCurrentInstance } from 'vue-demi';
 import { useRouter } from 'vue-router';
+import { ElMessageBox } from 'element-plus';
 
 const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const createTime = ref<string>();
@@ -71,9 +76,26 @@ defineProps<{
 
 const router = useRouter();
 
+const showDesc = (data: string) => {
+    ElMessageBox.alert(data, ' ', {
+        type: 'info',
+        center: true,
+        showConfirmButton: false,
+        showClose: false,
+        closeOnClickModal: true,
+        customClass: 'desc_box'
+    });
+};
+
 onMounted(() => {
     createTime.value = moment().format('LL');
 });
 </script>
 
-<style scoped></style>
+<style>
+.desc_box {
+    width:60vw;
+    max-height:50vh;
+    overflow-y:auto;
+}
+</style>

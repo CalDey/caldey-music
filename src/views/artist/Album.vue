@@ -96,7 +96,13 @@
                     <div
                         v-for="item in hotAlbum"
                         :key="item.id"
-                        class="mt-2 flex"
+                        class="mt-2 flex cursor-pointer hover:scale-105"
+                        @click="
+                            router.push({
+                                name: 'album',
+                                query: { id: item.id },
+                            })
+                        "
                     >
                         <el-image
                             class="w-14 card-radius flex-shrink-0"
@@ -147,15 +153,16 @@
                         </div>
                     </div>
                 </div>
+                <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from 'vue';
+import { onMounted, ref, toRefs, watch } from 'vue';
 import { useAlbum, useArtistAlbum, useAlbumComment } from '@/utils/api';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import Info from '@/views/artist/Info.vue';
 import { getCurrentInstance } from 'vue-demi';
 import { usePlayerStore } from '@/store/player';
@@ -168,10 +175,30 @@ const songList = ref<Song[]>([]);
 const hotAlbum = ref<Album[]>([]);
 const comment = ref<PlaylistHotComments[]>([]);
 const route = useRoute();
-const artistId = Number(route.query.id);
+const router = useRouter();
+const artistId = ref<number|null>(Number(route.query.id));
 const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const { pushPlayList, play } = usePlayerStore();
 const { id } = toRefs(usePlayerStore());
+
+// 路由跳转后自动定位到顶部
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0);
+});
+
+// 实现路由自身到自身跳转
+watch(
+    () => route.params,
+    (toParams, previousParams) => {
+        // console.log('路由改变了')
+        // 进行路由名称检验，防止keep-alive切换页面时触发watch
+        if(route.name === 'album') {
+            console.log(artistId.value)
+            artistId.value = Number(route.query.id);
+            getData();
+        }
+    },
+);
 
 // 播放全部
 const playAll = () => {
@@ -179,24 +206,27 @@ const playAll = () => {
     play(songList.value[0].id);
 };
 
-onMounted(async () => {
+const getData = async () => {
     // 获取专辑信息
-    const { album, songs } = await useAlbum(artistId);
+    const { album, songs } = await useAlbum(artistId.value as number);
     albumData.value = album;
     songList.value = songs;
+    // console.log(songList.value);
     hotAlbum.value = await useArtistAlbum(albumData.value.artist.id, 5, 0);
     //   console.log(albumData.value)
     //   console.log(songList.value)
-    console.log(hotAlbum.value);
+    // console.log(hotAlbum.value);
     // 获取专辑评论
-    const { hotComments, comments } = await useAlbumComment(artistId);
+    const { hotComments, comments } = await useAlbumComment(artistId.value as number);
     if (hotComments.length > 0) {
         comment.value = hotComments;
     } else {
         comment.value = comments;
     }
-    // console.log(hotComments)
-    // console.log(comments)
+};
+
+onMounted(() => {
+    getData();
 });
 </script>
 

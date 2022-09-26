@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PlaylistTag @change-tag="changeTag" :selected-tag="selectedTag" />
+        <PlaylistTag :selected-tag="selectedTag" @change-tag="changeTag" />
         <div class="safe-container">
             <div class="flex items-center">
                 <span class="font-bold text-xl mb-4"
@@ -83,17 +83,18 @@ import CoverItem from '@/components/common/CoverItem.vue';
 import { useIsMobileStore } from '@/store/m_check';
 import type { PlayListDetail } from '@/models/playlist';
 import { useTopPlaylistHighquality } from '@/utils/api';
+import { ElMessage } from 'element-plus';
 const { isMobile } = toRefs(useIsMobileStore());
 
 const route = useRoute();
 const router = useRouter();
 const list = ref<PlayListDetail[]>();
-const selectedTag = ref<any>()
+const selectedTag = ref<any>();
 
 const pageData = reactive({
     init: false,
     loading: false,
-    more: false,
+    more: true,
     limit: 20,
     before: 0,
     tag: '全部',
@@ -103,38 +104,43 @@ const changeTag = (tag: string) => {
     // 切换标签重置数据
     pageData.tag = tag;
     pageData.before = 0;
-    pageData.more = false;
+    pageData.more = true;
     getData();
 };
 
 const getData = async () => {
-    pageData.loading = true;
-
-    const { playlists, lasttime, more } = await useTopPlaylistHighquality({
-        limit: pageData.limit,
-        before: pageData.before,
-        cat: pageData.tag,
-    });
-    if (pageData.before <= 0) {
-        list.value = playlists;
+    if (pageData.more === false) {
+        ElMessage.warning({
+            message: '没有更多了',
+        });
     } else {
-        list.value?.push(...playlists);
+        pageData.loading = true;
+        const { playlists, lasttime, more } = await useTopPlaylistHighquality({
+            limit: pageData.limit,
+            before: pageData.before,
+            cat: pageData.tag,
+        });
+        if (pageData.before <= 0) {
+            list.value = playlists;
+        } else {
+            list.value?.push(...playlists);
+        }
+        pageData.init = true;
+        pageData.loading = false;
+        pageData.before = lasttime;
+        pageData.more = more;
     }
-    pageData.init = true;
-    pageData.loading = false;
-    pageData.before = lasttime;
-    pageData.more = more;
 };
 
 onMounted(() => {
     getData();
 });
 onActivated(() => {
-    if(route.params.tag as string) {
-        selectedTag.value = route.params.tag as string
-        changeTag(route.params.tag as string)
+    if (route.params.tag as string) {
+        selectedTag.value = route.params.tag as string;
+        changeTag(route.params.tag as string);
     }
-})
+});
 </script>
 
 <style scoped></style>

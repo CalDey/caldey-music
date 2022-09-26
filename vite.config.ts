@@ -20,6 +20,16 @@ export default defineConfig({
         '@': '/src/'
     }
   },
+  build: {
+    sourcemap: false,
+    terserOptions: {
+      compress: {
+        // 生产环境移除console,debugger
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
+  },
   server: {
     host: '0.0.0.0'
   }

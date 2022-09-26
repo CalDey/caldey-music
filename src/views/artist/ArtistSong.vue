@@ -79,7 +79,18 @@
                 </el-table-column>
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
-                        {{ scope.row.ar[0].name }}
+                        <div v-if="scope.row.ar.length <= 1">
+                            <span>{{ scope.row.ar[0].name }}</span>
+                        </div>
+                        <template v-else>
+                            <span
+                                v-for="(item, index) in scope.row.ar"
+                                :key="index"
+                            >
+                                <span v-if="index !== 0">/</span>
+                                <span>{{ item.name }}</span>
+                            </span>
+                        </template>
                     </template>
                 </el-table-column>
                 <el-table-column label="专辑" align="center">
@@ -111,7 +122,6 @@ const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const hotSongsList = ref<Song[]>([]);
 const { pushPlayList, play } = usePlayerStore();
 const { id } = toRefs(usePlayerStore());
-
 const loading = ref(true);
 
 // 播放全部
@@ -120,10 +130,13 @@ const playAll = () => {
     play(hotSongsList.value[0].id);
 };
 
-onMounted(async () => {
+const getData = async () => {
     hotSongsList.value = await useArtistHotSongs(props.id);
     loading.value = false;
-    console.log(hotSongsList.value);
+};
+
+onMounted(() => {
+    getData();
 });
 </script>
 

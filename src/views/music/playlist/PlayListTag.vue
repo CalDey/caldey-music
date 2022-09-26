@@ -35,17 +35,20 @@ import { usePlaylistHighqualityTags } from '@/utils/api';
 import type { PlaylistHighqualityTag } from '@/models/playlist';
 
 const props = defineProps<{
-    selectedTag: string
-}>()
+    selectedTag: string;
+}>();
 
 // 通过监听父组件传值实现标签跳转同时tag自动高亮
-watch(() => props.selectedTag, (val:string) => {
-    tags.value?.forEach((tag, index) => {
-        if(val === tag.name) {
-            clickIndex.value = index
-        }
-    })
-})
+watch(
+    () => props.selectedTag,
+    (val: string) => {
+        tags.value?.forEach((tag, index) => {
+            if (val === tag.name) {
+                clickIndex.value = index;
+            }
+        });
+    },
+);
 
 const emit = defineEmits<{
     (e: 'changeTag', tag: string, index: number): void;

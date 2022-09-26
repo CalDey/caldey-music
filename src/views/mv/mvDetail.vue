@@ -259,7 +259,12 @@
                             @click="
                                 router.push({
                                     name: 'mvDetail',
-                                    query: { id: item.id, video: 'true' },
+                                    query: {
+                                        id: item.id,
+                                        video: isNaN(
+                                            Number(item.id),
+                                        ).toString(),
+                                    },
                                 })
                             "
                         />
@@ -354,13 +359,19 @@ const simiMv = ref<SimiMv[]>([]);
 const totalComments = ref<number>();
 const relatedVideo = ref<RelatedVideo[]>([]);
 
+// 路由跳转后自动定位到顶部
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0);
+});
+
 // 视频页面数据初始化
 const initVideoPage = async () => {
     // 根据路由参数判断视频类型为video or MV
     setPause();
     setPlayerShow(1);
-    if (route.query.video === 'true') {    // video
-        console.log(route.query.video)
+    if (route.query.video === 'true') {
+        // video
+        console.log(route.query.video);
         id.value = route.query.id; // vid
         video.value = true;
         videoUrl.value = await useVideoUrl(id.value);
