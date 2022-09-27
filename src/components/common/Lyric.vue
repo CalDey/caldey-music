@@ -44,10 +44,37 @@
                 >
                     <span class="text-2xl">{{ song.name }}</span>
                     <div class="mt-2 text-slate-400">
-                        <span
+                        <!-- <span
                             >{{ handleSingerName(song.ar) }} -
-                            {{ song.al.name }}</span
-                        >
+                            {{ song.al.name }}
+                        </span> -->
+                        <span>
+                            <span
+                                v-if="song.ar.length <= 1"
+                                class="hover:theme-text-color cursor-pointer"
+                                @click="gotoSingerPage(song.ar[0].id)"
+                                >{{ song.ar[0].name }}</span
+                            >
+                            <template v-else>
+                                <span
+                                    v-for="(item, index) in song.ar"
+                                    :key="index"
+                                >
+                                    <span v-if="index !== 0">/</span>
+                                    <span
+                                        class="hover:theme-text-color cursor-pointer"
+                                        @click="gotoSingerPage(item.id)"
+                                        >{{ item.name }}</span
+                                    >
+                                </span>
+                            </template>
+                            -
+                            <span
+                                class="hover:theme-text-color cursor-pointer"
+                                @click="gotoAlbumPage(song.al.id)"
+                                >{{ song.al.name }}</span
+                            >
+                        </span>
                     </div>
                     <NLyric :id="song.id" />
                 </div>
@@ -59,6 +86,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { usePlayerStore } from '@/store/player';
+import { useRouter } from 'vue-router';
 import NLyric from '@/components/common/NLyric.vue';
 const { song, isPause } = toRefs(usePlayerStore());
 const props = defineProps<{
@@ -70,16 +98,28 @@ const emit = defineEmits<{
 const handleClose = () => {
     emit('handleClose');
 };
+const router = useRouter();
 
-const handleSingerName = (name: any) => {
-    let singer: any = [];
-    name.forEach((i: any) => {
-        // console.log(i.name)
-        singer.push(i.name);
-    });
-    singer = singer.join('/');
-    return singer;
+// 点击歌手跳转歌手详情页
+const gotoSingerPage = (id: number) => {
+    handleClose();
+    router.push({ name: 'artistDetail', query: { id: id } });
 };
+
+// 点击专辑跳转专辑详情页
+const gotoAlbumPage = (id: number) => {
+    handleClose();
+    router.push({ name: 'album', query: { id: id } });
+};
+
+// const handleSingerName = (name: any) => {
+//     let singer: any = [];
+//     name.forEach((i: any) => {
+//         singer.push(i.name);
+//     });
+//     singer = singer.join('/');
+//     return singer;
+// };
 </script>
 
 <style lang="scss" scoped>

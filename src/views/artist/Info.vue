@@ -19,9 +19,12 @@
                 <span class="ml-2">{{ playlist.artist.name }}</span>
                 <span class="ml-2">{{ createTime }}创建</span>
             </div>
-            <span class="mt-2 text-center lg:text-left w-80 truncate cursor-pointer select-none"
-            @click="showDesc(playlist.description)">
-                {{ playlist.description }}</span>
+            <span
+                class="mt-2 text-center lg:text-left w-80 truncate cursor-pointer select-none"
+                @click="showDesc(playlist.description)"
+            >
+                {{ playlist.description }}</span
+            >
             <div class="mt-2">
                 <el-button type="primary" round @click="playAll">
                     <svg
@@ -63,7 +66,7 @@ const showDesc = (data: string) => {
         showConfirmButton: false,
         showClose: false,
         closeOnClickModal: true,
-        customClass: 'desc_box'
+        customClass: 'desc_box',
     });
 };
 
@@ -74,8 +77,8 @@ onMounted(() => {
 
 <style>
 .desc_box {
-    width:60vw;
-    max-height:50vh;
-    overflow-y:auto;
+    width: 60vw;
+    max-height: 50vh;
+    overflow-y: auto;
 }
 </style>

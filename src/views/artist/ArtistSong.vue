@@ -79,7 +79,7 @@
                 </el-table-column>
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
-                        <div v-if="scope.row.ar.length <= 1">
+                        <div v-if="scope.row.ar?.length <= 1">
                             <span>{{ scope.row.ar[0].name }}</span>
                         </div>
                         <template v-else>

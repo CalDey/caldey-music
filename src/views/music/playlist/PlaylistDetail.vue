@@ -75,7 +75,7 @@
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
                         <div
-                            v-if="scope.row.ar.length <= 1"
+                            v-if="scope.row.ar?.length <= 1"
                             class="cursor-pointer"
                         >
                             <span
@@ -264,30 +264,6 @@ const playAll = () => {
     play(songs.value[0].id);
 };
 
-const getData = () => {
-    const id = Number(route.query.id);
-    // 获取歌单详情
-    usePlayListDetail(id).then((res) => {
-        playlist.value = res;
-    });
-    // 获取歌单内所有歌曲数据
-    usePlayListTrackAll(id).then((res) => {
-        songs.value = res;
-    });
-    // 获取歌单收藏用户信息
-    usePlayListSubscribers(id).then((res) => {
-        subscribers.value = res;
-    });
-    // 获取相似歌单推荐
-    usePlayListRelated(id).then((res) => {
-        related.value = res;
-    });
-    // 获取歌单评论
-    usePlayListComment(id).then((res) => {
-        comments.value = res;
-    });
-};
-
 // 实现路由自身到自身跳转
 watch(
     () => route.params,
@@ -300,8 +276,22 @@ watch(
     },
 );
 
-onMounted(async () => {
-    await getData();
+const getData = async () => {
+    const id = Number(route.query.id);
+    // 获取歌单详情
+    playlist.value = await usePlayListDetail(id);
+    // 获取歌单内所有歌曲数据
+    songs.value = await usePlayListTrackAll(id);
+    // 获取歌单收藏用户信息
+    subscribers.value = await usePlayListSubscribers(id);
+    // 获取相似歌单推荐
+    related.value = await usePlayListRelated(id);
+    // 获取歌单评论
+    comments.value = await usePlayListComment(id);
+};
+
+onMounted(() => {
+    getData();
 });
 </script>
 

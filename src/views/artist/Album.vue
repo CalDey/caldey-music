@@ -25,6 +25,7 @@
             </div>
             <el-table
                 v-if="albumData && songList.length > 0"
+                stripe
                 :data="songList"
                 :header-cell-style="{ background: 'rgba(153,153,153,.1)' }"
                 class="w-full mt-10 mb-0 lg:mb-20"
@@ -73,7 +74,30 @@
                 <el-table-column prop="name" label="歌曲" align="center" />
                 <el-table-column label="歌手" align="center">
                     <template #default="scope">
-                        {{ scope.row.ar[0].name }}
+                        <div
+                            v-if="scope.row.ar?.length <= 1"
+                            class="cursor-pointer"
+                        >
+                            <span
+                                class="hover:theme-text-color"
+                                @click="gotoSingerPage(scope.row.ar[0].id)"
+                                >{{ scope.row.ar[0].name }}</span
+                            >
+                        </div>
+                        <template v-else>
+                            <span
+                                v-for="(item, index) in scope.row.ar"
+                                :key="index"
+                                class="cursor-pointer"
+                            >
+                                <span v-if="index !== 0">/</span>
+                                <span
+                                    class="hover:theme-text-color"
+                                    @click="gotoSingerPage(item.id)"
+                                    >{{ item.name }}</span
+                                >
+                            </span>
+                        </template>
                     </template>
                 </el-table-column>
                 <el-table-column label="专辑" align="center">
@@ -91,7 +115,7 @@
         <div class="w-full lg:w-1/3">
             <!-- 热门专辑 -->
             <div class="mt-4 border p-4 rounded-md">
-                <span class="border-l-4 border-red-400 pl-2">热门专辑</span>
+                <span class="border-l-4 theme-border-color pl-2">热门专辑</span>
                 <div v-if="hotAlbum.length > 0">
                     <div
                         v-for="item in hotAlbum"
@@ -119,7 +143,7 @@
             </div>
             <!-- 精彩评论 -->
             <div class="mt-4 mb-20 border p-4 rounded-md">
-                <span class="border-l-4 border-red-400 pl-2">精彩评论</span>
+                <span class="border-l-4 theme-border-color pl-2">精彩评论</span>
                 <div v-if="comment.length > 0">
                     <div
                         v-for="item in comment"
@@ -176,7 +200,7 @@ const hotAlbum = ref<Album[]>([]);
 const comment = ref<PlaylistHotComments[]>([]);
 const route = useRoute();
 const router = useRouter();
-const artistId = ref<number|null>(Number(route.query.id));
+const artistId = ref<number | null>(Number(route.query.id));
 const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const { pushPlayList, play } = usePlayerStore();
 const { id } = toRefs(usePlayerStore());
@@ -190,10 +214,9 @@ router.afterEach((to, from, next) => {
 watch(
     () => route.params,
     (toParams, previousParams) => {
-        // console.log('路由改变了')
         // 进行路由名称检验，防止keep-alive切换页面时触发watch
-        if(route.name === 'album') {
-            console.log(artistId.value)
+        if (route.name === 'album') {
+            console.log(artistId.value);
             artistId.value = Number(route.query.id);
             getData();
         }
@@ -206,18 +229,21 @@ const playAll = () => {
     play(songList.value[0].id);
 };
 
+// 点击歌手跳转歌手详情页
+const gotoSingerPage = (id: number) => {
+    router.push({ name: 'artistDetail', query: { id: id } });
+};
+
 const getData = async () => {
     // 获取专辑信息
     const { album, songs } = await useAlbum(artistId.value as number);
     albumData.value = album;
     songList.value = songs;
-    // console.log(songList.value);
     hotAlbum.value = await useArtistAlbum(albumData.value.artist.id, 5, 0);
-    //   console.log(albumData.value)
-    //   console.log(songList.value)
-    // console.log(hotAlbum.value);
     // 获取专辑评论
-    const { hotComments, comments } = await useAlbumComment(artistId.value as number);
+    const { hotComments, comments } = await useAlbumComment(
+        artistId.value as number,
+    );
     if (hotComments.length > 0) {
         comment.value = hotComments;
     } else {
@@ -240,8 +266,9 @@ onMounted(() => {
         width: 2px;
         height: 100%;
         margin-left: 2px;
-        background-color: #ff410f;
+        // background-color: #ff410f;
         animation: play 0.9s linear infinite alternate !important;
+        @apply bg-blue-400;
     }
 }
 

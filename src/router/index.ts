@@ -34,7 +34,7 @@ const router = createRouter({
                 },
                 {
                     path: '/playlist-detail',
-                    name: 'PlaylistDetail',   // 歌单
+                    name: 'PlaylistDetail',   // 歌单详情
                     component: () => import("@/views/music/playlist/PlaylistDetail.vue"),
                     meta: {
                         keepAlive: true
