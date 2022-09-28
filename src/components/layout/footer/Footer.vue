@@ -127,18 +127,39 @@
                         </svg>
                     </div>
                     <!-- 音量控制 -->
-                    <!-- <el-popover v-if="!isMobile" placement="top" width="50px" class="z-20">
-                        <template #reference>
-                            <svg class="w-6 cursor-pointer" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M512 128a128 128 0 0 0-128 128v256a128 128 0 1 0 256 0V256a128 128 0 0 0-128-128zm0-64a192 192 0 0 1 192 192v256a192 192 0 1 1-384 0V256A192 192 0 0 1 512 64zm-32 832v-64a288 288 0 0 1-288-288v-32a32 32 0 0 1 64 0v32a224 224 0 0 0 224 224h64a224 224 0 0 0 224-224v-32a32 32 0 1 1 64 0v32a288 288 0 0 1-288 288v64h64a32 32 0 1 1 0 64H416a32 32 0 1 1 0-64h64z"></path></svg>
-                        </template>
-                        <div class="flex flex-col items-center  pt-2">
-                            <div>
-                                <el-slider vertical height="100px" :show-tooltip="false" v-model="volume" :max="100" :min="0" size="small"
-                                        :disabled="muted" @input="setVolume"/>
+                    <div v-if="!isMobile" class="z-20">
+                        <el-popover placement="top" width="50px">
+                            <template #reference>
+                                <svg
+                                    class="w-6 cursor-pointer"
+                                    viewBox="0 0 1024 1024"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    data-v-ba633cb8=""
+                                >
+                                    <path
+                                        fill="currentColor"
+                                        d="M512 128a128 128 0 0 0-128 128v256a128 128 0 1 0 256 0V256a128 128 0 0 0-128-128zm0-64a192 192 0 0 1 192 192v256a192 192 0 1 1-384 0V256A192 192 0 0 1 512 64zm-32 832v-64a288 288 0 0 1-288-288v-32a32 32 0 0 1 64 0v32a224 224 0 0 0 224 224h64a224 224 0 0 0 224-224v-32a32 32 0 1 1 64 0v32a288 288 0 0 1-288 288v64h64a32 32 0 1 1 0 64H416a32 32 0 1 1 0-64h64z"
+                                    ></path>
+                                </svg>
+                            </template>
+                            <div class="flex flex-col items-center pt-2">
+                                <div>
+                                    <el-slider
+                                        v-model="volume"
+                                        vertical
+                                        height="100px"
+                                        :show-tooltip="false"
+                                        :max="100"
+                                        :min="0"
+                                        size="small"
+                                        :disabled="muted"
+                                        @input="setVolume"
+                                    />
+                                </div>
+                                <div class="text-sm mt-3">{{ volume }}</div>
                             </div>
-                            <div class="text-sm mt-3">{{ volume }}</div>
-                        </div>
-                    </el-popover> -->
+                        </el-popover>
+                    </div>
                     <!-- 播放列表 -->
                     <div
                         class="cursor-pointer flex items-center z-20"

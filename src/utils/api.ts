@@ -98,6 +98,17 @@ export async function useSongUrl(id: number) {
     return data[0]
 }
 
+// 获取歌曲评论
+export async function useMusicComments(id:number, limit?: number, before?: number, offset?: number) {
+    const { hotComments, comments, total, more } = await http.get<{ hotComments: PlaylistHotComments[], comments: PlaylistHotComments[], total: number, more: boolean }>('/comment/music', {
+        id,
+        limit,
+        offset,
+        before
+    })
+    return { hotComments, comments, total, more }
+}
+
 // 获取歌曲歌词
 export async function useLyric(id: number) {
     const { lrc } = await http.get<{ lrc: Lyric[] }>('/lyric', { id: id })

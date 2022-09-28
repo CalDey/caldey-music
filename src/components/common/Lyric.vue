@@ -79,55 +79,239 @@
                     <NLyric :id="song.id" />
                 </div>
             </div>
+            <!-- 评论 -->
+            <div class="mt-10 mb-20">
+                <div class="border-b-2 border-b-blue-300">
+                    <span class="text-2xl">评论</span>
+                    <span class="ml-2">共{{ totalComments }}评论</span>
+                </div>
+                <!-- 精彩评论 -->
+                <div v-if="hotCommentsData.length > 0">
+                    <div class="border-l-4 theme-border-color pl-2 my-6">
+                        精彩评论
+                    </div>
+                    <div
+                        v-for="item in hotCommentsData"
+                        :key="item.commentId"
+                        class="mt-2 flex"
+                    >
+                        <el-avatar
+                            size="large"
+                            :src="item.user.avatarUrl"
+                            class="flex-shrink-0"
+                        ></el-avatar>
+                        <div class="ml-2">
+                            <div>
+                                <span>{{ item.user.nickname }}</span>
+                                <span class="text-slate-400 ml-2 text-xs">{{
+                                    moment(item.time).fromNow()
+                                }}</span>
+                            </div>
+                            <div
+                                class="text-xs p-2 mt-2 bg-slate-100 card-radius"
+                            >
+                                <span>{{ item.content }}</span>
+                                <div v-if="item.beReplied.length > 0">
+                                    <div
+                                        v-for="reply in item.beReplied"
+                                        :key="reply.beRepliedCommentId"
+                                        class="m-2 p-2 bg-white card-radius text-slate-400"
+                                    >
+                                        <span class="theme-text-color mr-2"
+                                            >@{{ reply.user.nickname }}:</span
+                                        >
+                                        <span>{{ reply.content }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 flex items-center text-xs">
+                                <icon-svg
+                                    class="w-4 h-4"
+                                    icon-name="#icon-zan"
+                                ></icon-svg>
+                                <span class="ml-1">{{ item.likedCount }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最新评论 -->
+                <div v-if="commentsData.length > 0">
+                    <div class="border-l-4 theme-border-color pl-2 my-6">
+                        最新评论({{ totalComments }})
+                    </div>
+                    <div
+                        v-for="item in commentsData"
+                        :key="item.commentId"
+                        class="mt-2 flex"
+                    >
+                        <el-avatar
+                            size="large"
+                            :src="item.user.avatarUrl"
+                            class="flex-shrink-0"
+                        ></el-avatar>
+                        <div class="ml-2">
+                            <div>
+                                <span>{{ item.user.nickname }}</span>
+                                <span class="text-slate-400 ml-2 text-xs">{{
+                                    moment(item.time).fromNow()
+                                }}</span>
+                            </div>
+                            <div
+                                class="text-xs p-2 mt-2 bg-slate-100 card-radius"
+                            >
+                                <span>{{ item.content }}</span>
+                                <div v-if="item.beReplied.length > 0">
+                                    <div
+                                        v-for="reply in item.beReplied"
+                                        :key="reply.beRepliedCommentId"
+                                        class="m-2 p-2 bg-white card-radius text-slate-400"
+                                    >
+                                        <span class="theme-text-color mr-2"
+                                            >@{{ reply.user.nickname }}:</span
+                                        >
+                                        <span>{{ reply.content }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 flex items-center text-xs">
+                                <icon-svg
+                                    class="w-4 h-4"
+                                    icon-name="#icon-zan"
+                                ></icon-svg>
+                                <span class="ml-1">{{ item.likedCount }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="pageData.init" class="safe-container">
+                        <div class="py-5 mb-20">
+                            <el-button
+                                type="text"
+                                :loading="pageData.loading"
+                                class="w-full"
+                                @click="getComments"
+                                >加载更多</el-button
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
+            </div>
         </el-drawer>
     </div>
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue';
+import { toRefs, ref, reactive, computed, onMounted, watch } from 'vue';
 import { usePlayerStore } from '@/store/player';
 import { useRouter } from 'vue-router';
 import NLyric from '@/components/common/NLyric.vue';
+import { useMusicComments } from '@/utils/api';
+import type { PlaylistHotComments } from '@/models/playlist';
+import { getCurrentInstance } from 'vue-demi';
+import { ElMessage } from 'element-plus';
+import { scrollIntoView } from 'element-plus/lib/utils';
+const moment = getCurrentInstance()?.appContext.config.globalProperties.$moment;
 const { song, isPause } = toRefs(usePlayerStore());
 const props = defineProps<{
     showLyric: boolean;
 }>();
+
 const emit = defineEmits<{
     (e: 'handleClose'): void;
 }>();
+const totalComments = ref<number>(0);
+const hotCommentsData = ref<PlaylistHotComments[]>([]);
+const commentsData = ref<PlaylistHotComments[]>([]);
+const pageData = reactive({
+    init: false,
+    loading: false,
+    more: true,
+    limit: 20,
+    before: 0,
+    page: 1,
+});
+
+const offset = computed(() => {
+    return (pageData.page - 1) * pageData.limit;
+});
+
 const handleClose = () => {
     emit('handleClose');
 };
-const router = useRouter();
 
+const router = useRouter();
 // 点击歌手跳转歌手详情页
 const gotoSingerPage = (id: number) => {
     handleClose();
     router.push({ name: 'artistDetail', query: { id: id } });
 };
-
 // 点击专辑跳转专辑详情页
 const gotoAlbumPage = (id: number) => {
     handleClose();
     router.push({ name: 'album', query: { id: id } });
 };
 
-// const handleSingerName = (name: any) => {
-//     let singer: any = [];
-//     name.forEach((i: any) => {
-//         singer.push(i.name);
-//     });
-//     singer = singer.join('/');
-//     return singer;
-// };
+watch(song, (val) => {
+    rePage();
+    getComments();
+});
+
+const rePage = () => {
+    console.log('change');
+    pageData.more = true;
+    pageData.before = 0;
+    hotCommentsData.value = [];
+    commentsData.value = [];
+};
+
+const getComments = async () => {
+    if (pageData.more === false) {
+        ElMessage.warning({
+            message: '没有更多了',
+        });
+    } else {
+        pageData.loading = true;
+        const { hotComments, comments, total, more } = await useMusicComments(
+            song.value.id,
+            pageData.limit,
+            pageData.before,
+            offset.value,
+        );
+        totalComments.value = total;
+        if (hotComments && hotCommentsData.value.length <= 0) {
+            hotCommentsData.value = hotComments;
+        }
+        // if(hotCommentsData.value.length <= 0) {
+        //     hotCommentsData.value = hotComments
+        // }
+        if (pageData.before <= 0) {
+            commentsData.value = comments;
+        } else {
+            commentsData.value.push(...comments);
+        }
+        pageData.init = true;
+        pageData.loading = false;
+        // console.log(comments[19].time)
+        if (comments.length < 20) {
+            pageData.more = false;
+        } else {
+            pageData.before = comments[19].time;
+        }
+        // pageData.before = comments[19].time
+        // console.log(more)
+        // pageData.more = more;
+    }
+};
+
+onMounted(() => {
+    getComments();
+});
 </script>
 
 <style lang="scss" scoped>
 .cd_bg {
     background: url('../../../src/assets/image/cd.png');
     background-size: 100% 100%;
-    /* width: 20rem;
-    height: 20rem; */
 }
 /* 暂停旋转动画 */
 .play_paused {
@@ -139,9 +323,4 @@ const gotoAlbumPage = (id: number) => {
 }
 </style>
 
-<style lang="scss">
-// .lyric-drawer .el-drawer__header {  // 通过最外层父类重写el-drawer样式
-//     background: rgba(255, 255, 255, 0.8);
-//     margin-bottom: 0px!important;
-// }
-</style>
+<style lang="scss"></style>

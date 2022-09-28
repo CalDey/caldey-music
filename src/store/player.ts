@@ -42,12 +42,13 @@ export const usePlayerStore = defineStore({
             return state.playList.findIndex(song => song.id === state.id)
         },
         nextSong(state): Song {
+            // console.log('next')
             const { thisIndex, playListCount } = this
             if (thisIndex === playListCount - 1) {
                 return state.playList[0]
             } else {
                 const nextIndex: number = thisIndex + 1
-                return state.playList[nextIndex];
+                return state.playList[nextIndex];   
             }
         },
         prevSong(state): Song {
@@ -100,10 +101,7 @@ export const usePlayerStore = defineStore({
             if (id == this.id) return;
             this.isPlaying = false
             const data = await useSongUrl(id)
-            // console.log(data.id)
             this.audio.src = 'https://music.163.com/song/media/outer/url?id=' + data.id + '.mp3';
-            // console.log(this.audio.src)
-            // console.log(this.audio)
             this.audio.play().then(res => {
                 this.isPlaying = true
                 this.songUrl = data
@@ -111,11 +109,13 @@ export const usePlayerStore = defineStore({
                 this.id = id;
                 this.songDetail()
             }).catch(res => {
+                this.id = id;
                 console.log(res)
                 ElMessage.error({
                     showClose: true,
                     message: '抱歉，该歌曲无法正常播放',
                 })
+                this.next()
             })
         },
         // 获取歌词

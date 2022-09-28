@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mt-4 p-4 w-full h-full lg:h-96 mb-14 lg:mb-0 bg-slate-100 opacity-60 lg:overflow-y-scroll"
+        class="mt-4 p-4 w-full h-full lg:h-96 mb-2 lg:mb-0 bg-slate-100 opacity-60 lg:overflow-y-scroll"
         style="white-space: pre-wrap"
     >
         <div ref="lyricList">
