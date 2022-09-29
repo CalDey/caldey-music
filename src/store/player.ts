@@ -34,6 +34,15 @@ export const usePlayerStore = defineStore({
         currentLyric: null, // 解析后歌词数据
         playerShow: false   // 控制播放器显隐
     }),
+    persist: {
+        enabled: true,
+        strategies: [
+            { 
+                storage: localStorage,
+                paths: ['playList'] // 缓存歌单列表
+             }
+        ]
+    },
     getters: {
         playListCount: state => {
             return state.playList.length
@@ -76,6 +85,10 @@ export const usePlayerStore = defineStore({
                     this.playList.push(song)
                 }
             })
+        },
+        // 删除播放列表中某歌曲
+        deleteSong(id: number) {
+            this.playList.splice(this.playList.findIndex(s => s.id == id), 1)
         },
         // 清空播放列表
         clearPlayList() {

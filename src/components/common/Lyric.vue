@@ -297,9 +297,6 @@ const getComments = async () => {
         } else {
             pageData.before = comments[19].time;
         }
-        // pageData.before = comments[19].time
-        // console.log(more)
-        // pageData.more = more;
     }
 };
 
