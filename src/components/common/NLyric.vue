@@ -11,7 +11,9 @@
                     ref="lyricRef"
                     :key="index"
                     class="my-4 text-xs"
-                    :class="currentLyricNum === index ? 'theme-text-color' : ''"
+                    :class="
+                        currentLyricNum === index ? 'text-skin-text-select' : ''
+                    "
                 >
                     {{ item.txt }}
                 </p>

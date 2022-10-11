@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-gray-400">
+    <div class="w-full bg-slate-300">
         <div class="flex flex-col items-center py-10">
             <!-- 歌手头像 -->
             <el-image

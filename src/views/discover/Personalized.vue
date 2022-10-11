@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container">
+    <div class="safe-container text-skin-text">
         <div class="flex items-center">
             <span class="font-bold text-xl mb-4">推荐歌单</span>
         </div>

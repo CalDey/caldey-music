@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container">
+    <div class="safe-container text-skin-text">
         <!-- 筛选条件 -->
         <div
             v-for="option in options"
@@ -14,7 +14,7 @@
                     (item.key === pageData.type && option.key === 'type') ||
                     (item.key === pageData.area && option.key === 'area') ||
                     (item.key === pageData.initial && option.key === 'initial')
-                        ? 'theme-bg-color text-white'
+                        ? 'bg-skin-bg-hover text-white'
                         : ''
                 "
                 @click="changeOptions(option.key, item.key)"
@@ -30,7 +30,7 @@
             <div
                 v-for="item in artist"
                 :key="item.id"
-                class="flex flex-col items-center mt-8 hover:scale-105"
+                class="flex flex-col items-center mt-8 hover:scale-110"
                 @click="
                     router.push({
                         name: 'artistDetail',

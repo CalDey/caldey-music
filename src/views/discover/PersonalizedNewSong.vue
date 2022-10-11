@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container">
+    <div class="safe-container text-skin-text">
         <div class="flex items-center">
             <span class="font-bold text-xl mb-4">推荐新音乐</span>
         </div>
@@ -7,12 +7,13 @@
             <div
                 v-for="(item, index) in personalizedNewSong"
                 :key="index"
-                class="flex items-center w-full lg:w-1/2 my-2 cursor-pointer hover:bg-slate-100 hover:scale-105"
+                class="flex items-center w-full lg:w-1/2 my-2 cursor-pointer hover:bg-skin-card hover:scale-105"
+                @click="play(item.id)"
             >
-                <img class="w-14" :src="item.picUrl" @click="play(item.id)" />
+                <img class="w-14" :src="item.picUrl" />
                 <div class="flex flex-col ml-2 text-md">
                     <span>{{ item.name }}</span>
-                    <span class="text-sm text-slate-400">{{
+                    <span class="text-sm text-skin-text-sec">{{
                         item.song.artists[0].name
                     }}</span>
                 </div>

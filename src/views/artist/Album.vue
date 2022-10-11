@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container flex flex-col lg:flex-row">
+    <div class="safe-container flex flex-col lg:flex-row text-skin-text">
         <div
             class="w-full lg:w-2/3 border-0 lg:border mr-4 p-0 lg:p-4 rounded-md"
         >
@@ -79,7 +79,7 @@
                             class="cursor-pointer"
                         >
                             <span
-                                class="hover:theme-text-color"
+                                class="hover:text-skin-text-hover"
                                 @click="gotoSingerPage(scope.row.ar[0].id)"
                                 >{{ scope.row.ar[0].name }}</span
                             >
@@ -92,7 +92,7 @@
                             >
                                 <span v-if="index !== 0">/</span>
                                 <span
-                                    class="hover:theme-text-color"
+                                    class="hover:text-skin-text-hover"
                                     @click="gotoSingerPage(item.id)"
                                     >{{ item.name }}</span
                                 >
@@ -115,7 +115,7 @@
         <div class="w-full lg:w-1/3">
             <!-- 热门专辑 -->
             <div class="mt-4 border p-4 rounded-md">
-                <span class="border-l-4 theme-border-color pl-2">热门专辑</span>
+                <span class="border-l-4 border-skin-border pl-2">热门专辑</span>
                 <div v-if="hotAlbum.length > 0">
                     <div
                         v-for="item in hotAlbum"
@@ -134,7 +134,7 @@
                         />
                         <div class="ml-2 truncate text-sm">
                             <div class="truncate">{{ item.name }}</div>
-                            <div class="mt-2 text-slate-400">
+                            <div class="mt-2 text-skin-text-sec">
                                 {{ item.artist.name }}
                             </div>
                         </div>
@@ -143,7 +143,7 @@
             </div>
             <!-- 精彩评论 -->
             <div class="mt-4 mb-20 border p-4 rounded-md">
-                <span class="border-l-4 theme-border-color pl-2">精彩评论</span>
+                <span class="border-l-4 border-skin-border pl-2">精彩评论</span>
                 <div v-if="comment.length > 0">
                     <div
                         v-for="item in comment"
@@ -158,18 +158,20 @@
                         <div class="ml-2">
                             <div>
                                 <span>{{ item.user.nickname }}</span>
-                                <span class="text-slate-400 ml-2 text-xs">{{
+                                <span class="text-skin-text-sec ml-2 text-xs">{{
                                     moment(item.time).fromNow()
                                 }}</span>
                             </div>
                             <div
-                                class="text-xs p-2 mt-2 bg-slate-100 card-radius"
+                                class="text-xs p-2 mt-2 bg-skin-card card-radius"
                             >
                                 {{ item.content }}
                             </div>
-                            <div class="mt-2 flex items-center text-xs">
+                            <div
+                                class="mt-2 flex items-center text-xs cursor-pointer"
+                            >
                                 <icon-svg
-                                    class="w-4 h-4"
+                                    class="w-4 h-4 animate-bounce"
                                     icon-name="#icon-zan"
                                 ></icon-svg>
                                 <span class="ml-1">{{ item.likedCount }}</span>
@@ -177,7 +179,9 @@
                         </div>
                     </div>
                 </div>
-                <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
+                <div v-else class="text-sm mt-2 text-skin-text-sec">
+                    暂无评论
+                </div>
             </div>
         </div>
     </div>

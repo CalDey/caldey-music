@@ -24,7 +24,7 @@
                 <el-tag
                     v-for="(item, index) in playlist.tags"
                     :key="index"
-                    class="mx-1 cursor-pointer"
+                    class="mx-1 cursor-pointer hover:scale-105"
                     @click="
                         router.push({
                             name: 'Playlist',

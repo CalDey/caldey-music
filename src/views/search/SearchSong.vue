@@ -64,7 +64,7 @@
                             class="cursor-pointer"
                         >
                             <span
-                                class="hover:theme-text-color"
+                                class="hover:text-skin-text-select"
                                 @click="gotoSingerPage(scope.row.ar[0].id)"
                                 >{{ scope.row.ar[0].name }}</span
                             >
@@ -77,7 +77,7 @@
                             >
                                 <span v-if="index !== 0">/</span>
                                 <span
-                                    class="hover:theme-text-color"
+                                    class="hover:text-skin-text-select"
                                     @click="gotoSingerPage(item.id)"
                                     >{{ item.name }}</span
                                 >

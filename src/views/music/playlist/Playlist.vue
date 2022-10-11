@@ -1,14 +1,14 @@
 <template>
     <div>
         <PlaylistTag :selected-tag="selectedTag" @change-tag="changeTag" />
-        <div class="safe-container">
+        <div class="safe-container text-skin-text">
             <div class="flex items-center">
                 <span class="font-bold text-xl mb-4"
                     >{{ pageData.tag }}歌单</span
                 >
             </div>
         </div>
-        <div class="safe-container">
+        <div class="safe-container text-skin-text">
             <div
                 v-if="list"
                 class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5"
@@ -30,7 +30,7 @@
                         show-play-count
                     />
                     <div class="truncate text-xs mt-2">{{ item.name }}</div>
-                    <div class="truncate text-xs text-slate-400 mt-2">
+                    <div class="truncate text-xs text-skin-text-sec mt-2">
                         {{ item.creator.nickname }}
                     </div>
                 </div>

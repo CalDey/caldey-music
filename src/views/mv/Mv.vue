@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container">
+    <div class="safe-container text-skin-text">
         <!-- 筛选条件 -->
         <div
             v-for="option in options"
@@ -14,7 +14,7 @@
                     (item === pageData.area && option.name === 'area') ||
                     (item === pageData.type && option.name === 'type') ||
                     (item === pageData.order && option.name === 'order')
-                        ? 'theme-bg-color text-white'
+                        ? 'bg-skin-bg-hover text-white'
                         : ''
                 "
                 @click="changeOptions(option.name, item)"

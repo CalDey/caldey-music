@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full overflow-hidden">
+    <div class="h-full overflow-hidden bg-skin-bg">
         <Header />
         <!-- keep-alive 缓存组件 -->
         <router-view v-slot="{ Component }">

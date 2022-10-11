@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container">
+    <div class="safe-container text-skin-text">
         <div>
             <div class="flex items-center">
                 <span class="font-bold text-xl mb-4">推荐MV</span>
@@ -24,7 +24,7 @@
                     video
                 />
                 <div class="truncate text-xs mt-2">{{ item.name }}</div>
-                <div class="truncate text-xs mt-1.5 text-slate-400">
+                <div class="truncate text-xs mt-1.5 text-skin-text-sec">
                     <small>{{ item.artistName }}</small>
                 </div>
             </div>

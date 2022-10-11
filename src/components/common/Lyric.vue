@@ -51,7 +51,7 @@
                         <span>
                             <span
                                 v-if="song.ar.length <= 1"
-                                class="hover:theme-text-color cursor-pointer"
+                                class="hover:text-skin-text-select cursor-pointer"
                                 @click="gotoSingerPage(song.ar[0].id)"
                                 >{{ song.ar[0].name }}</span
                             >
@@ -62,7 +62,7 @@
                                 >
                                     <span v-if="index !== 0">/</span>
                                     <span
-                                        class="hover:theme-text-color cursor-pointer"
+                                        class="hover:text-skin-text-select cursor-pointer"
                                         @click="gotoSingerPage(item.id)"
                                         >{{ item.name }}</span
                                     >
@@ -70,7 +70,7 @@
                             </template>
                             -
                             <span
-                                class="hover:theme-text-color cursor-pointer"
+                                class="hover:text-skin-text-select cursor-pointer"
                                 @click="gotoAlbumPage(song.al.id)"
                                 >{{ song.al.name }}</span
                             >
@@ -87,7 +87,7 @@
                 </div>
                 <!-- 精彩评论 -->
                 <div v-if="hotCommentsData.length > 0">
-                    <div class="border-l-4 theme-border-color pl-2 my-6">
+                    <div class="border-l-4 border-skin-border pl-2 my-6">
                         精彩评论
                     </div>
                     <div
@@ -117,16 +117,18 @@
                                         :key="reply.beRepliedCommentId"
                                         class="m-2 p-2 bg-white card-radius text-slate-400"
                                     >
-                                        <span class="theme-text-color mr-2"
+                                        <span class="text-skin-text-select mr-2"
                                             >@{{ reply.user.nickname }}:</span
                                         >
                                         <span>{{ reply.content }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-2 flex items-center text-xs">
+                            <div
+                                class="mt-2 flex items-center text-xs cursor-pointer"
+                            >
                                 <icon-svg
-                                    class="w-4 h-4"
+                                    class="w-4 h-4 animate-bounce"
                                     icon-name="#icon-zan"
                                 ></icon-svg>
                                 <span class="ml-1">{{ item.likedCount }}</span>
@@ -136,7 +138,7 @@
                 </div>
                 <!-- 最新评论 -->
                 <div v-if="commentsData.length > 0">
-                    <div class="border-l-4 theme-border-color pl-2 my-6">
+                    <div class="border-l-4 border-skin-border pl-2 my-6">
                         最新评论({{ totalComments }})
                     </div>
                     <div
@@ -166,16 +168,18 @@
                                         :key="reply.beRepliedCommentId"
                                         class="m-2 p-2 bg-white card-radius text-slate-400"
                                     >
-                                        <span class="theme-text-color mr-2"
+                                        <span class="text-skin-text-select mr-2"
                                             >@{{ reply.user.nickname }}:</span
                                         >
                                         <span>{{ reply.content }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-2 flex items-center text-xs">
+                            <div
+                                class="mt-2 flex items-center text-xs cursor-pointer"
+                            >
                                 <icon-svg
-                                    class="w-4 h-4"
+                                    class="w-4 h-4 animate-bounce"
                                     icon-name="#icon-zan"
                                 ></icon-svg>
                                 <span class="ml-1">{{ item.likedCount }}</span>

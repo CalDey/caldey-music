@@ -5,7 +5,7 @@
                 class="tag-container card-radius hover:scale-105"
                 :class="
                     clickIndex === -1
-                        ? 'theme-bg-color text-white'
+                        ? 'bg-skin-bg-hover text-white'
                         : 'bg-slate-200'
                 "
                 @click="tagClick('全部', -1)"
@@ -18,7 +18,7 @@
                 class="tag-container card-radius hover:scale-105"
                 :class="
                     clickIndex === index
-                        ? 'theme-bg-color text-white'
+                        ? 'bg-skin-bg-hover text-white'
                         : 'bg-slate-200'
                 "
                 @click="tagClick(tag.name, index)"

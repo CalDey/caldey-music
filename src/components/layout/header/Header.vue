@@ -1,5 +1,7 @@
 <template>
-    <div class="relative flex flex-col lg:flex-row items-center border-b">
+    <div
+        class="relative flex flex-col lg:flex-row items-center border-b text-skin-text"
+    >
         <div
             class="flex items-center mr-0 lg:mr-8 cursor-pointer select-none"
             @click="handleLogoBtn"
@@ -15,19 +17,19 @@
                     d="M598.4 831.872H328.192a256 256 0 0 1-34.496-510.528A352 352 0 1 1 598.4 831.872zm-271.36-64h272.256a288 288 0 1 0-248.512-417.664L335.04 381.44l-34.816 3.584a192 192 0 0 0 26.88 382.848z"
                 ></path>
             </svg>
-            <div class="ml-2 font-bold" style="width: 130px">
+            <div class="ml-2 font-bold lg:animate-bounce" style="width: 130px">
                 CalDey Music🎵
             </div>
         </div>
         <ul
             :class="[isShowMenu == false && isMobile == true ? 'hidden' : '']"
-            class="flex flex-col mt-2 lg:flex-row lg:mt-0 flex-1 w-screen lg:w-0 border-b lg:border-b-0"
+            class="box-border flex flex-col mt-2 lg:flex-row lg:mt-0 flex-1 w-screen lg:w-0 border-b lg:border-b-0"
         >
             <li
                 v-for="(item, index) in menus"
                 :key="index"
-                :class="[curIdx === index ? 'theme-text-color' : '']"
-                class="py-4 flex justify-center hover:theme-bg-color hover:text-white select-none font-bold"
+                :class="[curIdx === index ? 'text-skin-text-select' : '']"
+                class="py-4 flex justify-center lg:hover:border-blue-300 border-white border-b-4 select-none font-bold"
                 @click="changeMenu(item, index)"
             >
                 {{ item.name }}

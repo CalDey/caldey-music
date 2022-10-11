@@ -2,7 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {}
+@layer base {
+    // 换肤
+    // 默认皮肤
+    :root {
+        // 背景颜色
+        --color-bg-base: 255 255 255;
+        // --color-bg-base: 17 17 17;
+        // 卡片颜色
+        --color-bg-card: 241 245 249;
+        // --color-bg-card: 148 163 184;
+        // 文字颜色
+        --color-text: 17 17 17;
+        // --color-text: 255 255 255;
+        // 二级标题颜色
+        --color-text-sec: 148 163 184;
+        // 文字hover颜色
+        --color-text-hover: 255 255 255;
+        // 文字选中颜色
+        --color-text-select: 96 165 250;
+        // 背景选中颜色
+        --color-bg-hover: 147 197 253;
+        // border颜色
+        --color-border: 96 165 250;
+    }
+}
 
 @layer components {
     .card-radius {
@@ -12,13 +36,13 @@
         @apply mx-8 my-4
     }
     // 主题配色
-    .theme-text-color {
-        @apply text-blue-400
-    }
-    .theme-bg-color {
-        @apply bg-blue-300
-    }
-    .theme-border-color {
-        @apply border-blue-400
-    }
+    // .theme-text-color {
+    //     @apply text-blue-400
+    // }
+    // .theme-bg-color {
+    //     @apply bg-blue-300
+    // }
+    // .theme-border-color {
+    //     @apply border-blue-400
+    // }
 }

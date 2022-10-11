@@ -1,5 +1,5 @@
 <template>
-    <div class="safe-container flex flex-col lg:flex-row">
+    <div class="safe-container flex flex-col lg:flex-row text-skin-text">
         <div class="w-full lg:w-2/3 border-0 lg:border mr-4 px-4 rounded-md">
             <!-- 分别渲染视频和mv对应内容区域 -->
             <div class="flex-1 py-4">
@@ -33,7 +33,7 @@
                         {{ videoDetail.title }}
                     </div>
                 </div>
-                <div class="mt-2 text-xs text-gray-400">
+                <div class="mt-2 text-xs text-skin-text-sec">
                     <div v-if="mvDetail">
                         <span class="mr-2"
                             >发布：{{ mvDetail.publishTime }}</span
@@ -128,7 +128,7 @@
                 <span>Comments ｜ {{ totalComments }}条评论</span>
             </div>
             <!-- 精彩评论 -->
-            <div class="border-l-4 theme-border-color pl-2 my-4">精彩评论</div>
+            <div class="border-l-4 border-skin-border pl-2 my-4">精彩评论</div>
             <div v-if="mvHotComments.length > 0">
                 <div
                     v-for="item in mvHotComments"
@@ -143,7 +143,7 @@
                     <div class="ml-2">
                         <div>
                             <span>{{ item.user.nickname }}</span>
-                            <span class="text-slate-400 ml-2 text-xs">{{
+                            <span class="text-skin-text-sec ml-2 text-xs">{{
                                 moment(item.time).fromNow()
                             }}</span>
                         </div>
@@ -153,18 +153,20 @@
                                 <div
                                     v-for="reply in item.beReplied"
                                     :key="reply.beRepliedCommentId"
-                                    class="m-2 p-2 bg-white card-radius text-slate-400"
+                                    class="m-2 p-2 bg-white card-radius text-skin-text-sec"
                                 >
-                                    <span class="theme-text-color mr-2"
+                                    <span class="text-skin-text-select mr-2"
                                         >@{{ reply.user.nickname }}:</span
                                     >
                                     <span>{{ reply.content }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-2 flex items-center text-xs">
+                        <div
+                            class="mt-2 flex items-center text-xs cursor-pointer"
+                        >
                             <icon-svg
-                                class="w-4 h-4"
+                                class="w-4 h-4 animate-bounce"
                                 icon-name="#icon-zan"
                             ></icon-svg>
                             <span class="ml-1">{{ item.likedCount }}</span>
@@ -172,9 +174,9 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
+            <div v-else class="text-sm mt-2 text-skin-text-sec">暂无评论</div>
             <!-- 最新评价 -->
-            <div class="border-l-4 theme-border-color pl-2 my-4">最新评论</div>
+            <div class="border-l-4 border-skin-border pl-2 my-4">最新评论</div>
             <div v-if="mvComments.length > 0" class="mb-2">
                 <div
                     v-for="item in mvComments"
@@ -189,7 +191,7 @@
                     <div class="ml-2">
                         <div>
                             <span>{{ item.user.nickname }}</span>
-                            <span class="text-slate-400 ml-2 text-xs">{{
+                            <span class="text-skin-text-sec ml-2 text-xs">{{
                                 moment(item.time).fromNow()
                             }}</span>
                         </div>
@@ -199,18 +201,20 @@
                                 <div
                                     v-for="reply in item.beReplied"
                                     :key="reply.beRepliedCommentId"
-                                    class="m-2 p-2 bg-white card-radius text-slate-400"
+                                    class="m-2 p-2 bg-white card-radius text-skin-text-sec"
                                 >
-                                    <span class="theme-text-color mr-2"
+                                    <span class="text-skin-text-select mr-2"
                                         >@{{ reply.user.nickname }}:</span
                                     >
                                     <span>{{ reply.content }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-2 flex items-center text-xs">
+                        <div
+                            class="mt-2 flex items-center text-xs cursor-pointer"
+                        >
                             <icon-svg
-                                class="w-4 h-4"
+                                class="w-4 h-4 animate-bounce"
                                 icon-name="#icon-zan"
                             ></icon-svg>
                             <span class="ml-1">{{ item.likedCount }}</span>
@@ -218,12 +222,12 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="text-sm mt-2 text-slate-400">暂无评论</div>
+            <div v-else class="text-sm mt-2 text-skin-text-sec">暂无评论</div>
         </div>
         <div class="w-full lg:w-1/3 mb-20">
             <!-- 视频简介 -->
             <div class="mt-4 lg:mt-0 border p-4 rounded-md">
-                <div class="border-l-4 theme-border-color pl-2 mb-2">
+                <div class="border-l-4 border-skin-border pl-2 mb-2">
                     视频简介
                 </div>
                 <div v-if="mvDetail">
@@ -245,7 +249,7 @@
             </div>
             <!-- 相关推荐 -->
             <div class="mt-4 border p-4 rounded-md">
-                <div class="border-l-4 theme-border-color pl-2 mb-2">
+                <div class="border-l-4 border-skin-border pl-2 mb-2">
                     相关推荐
                 </div>
                 <div v-if="simiMv.length > 0">
@@ -275,7 +279,7 @@
                             ></icon-svg>
                             <span>{{ item.name }}</span>
                         </span>
-                        <div class="text-slate-400 text-sm mb-4">
+                        <div class="text-skin-text-sec text-sm mb-4">
                             By.{{ item.artistName }}
                         </div>
                     </div>
@@ -296,7 +300,7 @@
                             "
                         />
                         <span>{{ item.title }}</span>
-                        <div class="text-slate-400 text-sm mb-4">
+                        <div class="text-skin-text-sec text-sm mb-4">
                             By.{{ item.creator[0].userName }}
                         </div>
                     </div>

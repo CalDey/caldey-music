@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-20">
+    <div class="mb-20 text-skin-text">
         <div class="safe-container">
             <!-- 官方榜 -->
             <div class="flex items-center">
@@ -12,7 +12,7 @@
                 <div
                     v-for="item in topListDetailData.slice(0, 4)"
                     :key="item.id"
-                    class="bg-slate-100 card-radius flex hover:scale-105"
+                    class="bg-skin-card card-radius flex hover:scale-105"
                     @click="
                         router.push({
                             name: 'PlaylistDetail',
