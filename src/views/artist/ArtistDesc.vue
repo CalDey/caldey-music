@@ -1,6 +1,6 @@
 <template>
     <div v-loading="loading" class="safe-container" style="min-height: 5rem">
-        <div v-if="artistDesc">
+        <div v-if="artistDesc && artistDesc.introduction.length > 0">
             <div v-for="(item, index) in artistDesc.introduction" :key="index">
                 <div class="py-5 font-bold text-sm">{{ item.ti }}</div>
                 <div

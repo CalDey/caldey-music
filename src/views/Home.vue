@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full overflow-hidden bg-skin-bg">
+    <div class="h-full overflow-hidden bg-skin-bg font-style">
         <Header />
         <!-- keep-alive 缓存组件 -->
         <router-view v-slot="{ Component }">
@@ -27,4 +27,8 @@ import Footer from '@/components/layout/footer/Footer.vue';
 document.body.style.overflowX = 'hidden';
 </script>
 
-<style scoped></style>
+<style scoped>
+.font-style {
+    font-family: poppin, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
+}
+</style>
