@@ -5,9 +5,6 @@
 该项目使用[网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/)，可参考文档部署接口，推荐使用`Vercel`进行部署\
 22/09/22更新：由于Vercel被🧱，现在改用阿里云服务器部署Node服务
 
-# 在线预览Demo
-http://182.92.202.161:3003/#/
-
 # 项目预览
 (主要页面全部适配骨架屏，具体效果可以参考在线Demo)
 <div>
